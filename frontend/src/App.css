@@ -1,0 +1,333 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* High-End Notched Navbar (Curve Outside) */
+.navbar-dock {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 70px;
+  background: #111; /* Dark Bar */
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.navbar-pill {
+  position: relative;
+  display: flex;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item-pill {
+  position: relative;
+  flex: 1;
+  z-index: 10;
+}
+
+.nav-item-pill a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+  text-decoration: none;
+  color: #fff;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.nav-item-pill.active a {
+  opacity: 1;
+}
+
+.nav-icon {
+  display: block;
+  line-height: normal;
+  transition: transform 0.5s;
+}
+
+.nav-item-pill.active .nav-icon {
+  transform: translateY(-35px); /* Move icon up into the notch */
+  color: #111; /* Invert icon color if it sits on the green circle */
+}
+
+.nav-label {
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.nav-item-pill.active .nav-label {
+  opacity: 1;
+}
+
+/* Green Circular Indicator */
+.indicator {
+  position: absolute;
+  top: -50%;
+  width: 70px;
+  height: 70px;
+  background: #39FF14; /* Neon Green */
+  border-radius: 50%;
+  border: 6px solid #fdfdfd; /* Match page bg if needed, or stick to transparent */
+  transition: 0.5s;
+  z-index: 5;
+}
+
+/* Correcting the border color to match the page background above (which is white/light) */
+.indicator {
+  border: 6px solid #fdfcf7; 
+}
+
+/* The Notch Curves */
+.indicator::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-right-radius: 20px;
+  box-shadow: 1px -10px 0 0 #111;
+}
+
+.indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-top-left-radius: 20px;
+  box-shadow: -1px -10px 0 0 #111;
+}
+
+/* Indicator Positioning Logic */
+.nav-item-pill:nth-child(1).active ~ .indicator { transform: translateX(calc(100px * 0 + 15px)); }
+.nav-item-pill:nth-child(2).active ~ .indicator { transform: translateX(calc(100px * 1 + 15px)); }
+.nav-item-pill:nth-child(3).active ~ .indicator { transform: translateX(calc(100px * 2 + 15px)); }
+.nav-item-pill:nth-child(4).active ~ .indicator { transform: translateX(calc(100px * 3 + 15px)); }
+.nav-item-pill:nth-child(5).active ~ .indicator { transform: translateX(calc(100px * 4 + 15px)); }
+
+/* Adjusting the translateX to be relative to the flex items (width 500px / 5 = 100px) */
+/* The 15px offset is to center the 70px indicator in the 100px slot */
+
+/* Desktop view adjustments */
+@media (max-width: 768px) {
+  .navbar-dock {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 65px;
+    border-radius: 0;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
+  }
+
+  .nav-item-pill a {
+    height: 65px;
+  }
+
+  .indicator {
+    top: -40%;
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+    left: 0; /* Align to container start */
+  }
+
+  /* Refined positioning logic for mobile (100% / 5 items = 20% each) */
+  /* We center the 60px indicator within each 20% slot */
+  .nav-item-pill:nth-child(1).active ~ .indicator { transform: translateX(calc((100% / 5) * 0 + (20% - 60px) / 2)); }
+  .nav-item-pill:nth-child(2).active ~ .indicator { transform: translateX(calc((100% / 5) * 1 + (20% - 60px) / 2)); }
+  .nav-item-pill:nth-child(3).active ~ .indicator { transform: translateX(calc((100% / 5) * 2 + (20% - 60px) / 2)); }
+  .nav-item-pill:nth-child(4).active ~ .indicator { transform: translateX(calc((100% / 5) * 3 + (20% - 60px) / 2)); }
+  .nav-item-pill:nth-child(5).active ~ .indicator { transform: translateX(calc((100% / 5) * 4 + (20% - 60px) / 2)); }
+
+  .nav-label {
+    font-size: 0.6rem;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    transform: translateY(15px);
+  }
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #1a1a2e;
+  color: white;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: #667eea;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: #667eea;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid #333;
+  color: #888;
+}
+
+/* General Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 4rem 2rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #333;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: white;
+  color: #667eea;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #667eea;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #667eea;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}
