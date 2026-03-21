@@ -2,11 +2,8 @@
 
 :root {
   --primary-color: #008080;
-  /* Teal/Dark Green from the button */
   --secondary-color: #f39c12;
-  /* Orange for highlights */
   --accent-color: #e74c3c;
-  /* Red for play button */
   --bg-light: #fdfdfd;
   --text-main: #2d3436;
   --text-muted: #636e72;
@@ -30,7 +27,6 @@
   min-height: 100vh;
 }
 
-/* Background Grid Pattern */
 .home-page-container::before {
   content: '';
   position: absolute;
@@ -54,7 +50,6 @@
   z-index: 1;
 }
 
-/* --- Hero Section --- */
 .hero-section {
   position: relative;
   min-height: 85vh;
@@ -170,9 +165,6 @@
   box-shadow: 0 8px 16px rgba(231, 76, 60, 0.3);
 }
 
-/* ==========================================================================
-   6. Contact Section Redesign (V3)
-   ========================================================================== */
 .contact-section-redesign {
   padding: 100px 0;
   background-color: #fdfcf7; /* Consistency with other sections */
@@ -413,9 +405,6 @@
   50% { transform: translateY(-15px); }
 }
 
-/* --- Hero Visual --- */
-
-/* Arrows */
 .curved-arrow {
   position: absolute;
   z-index: 1;
@@ -434,7 +423,6 @@
   width: 220px;
 }
 
-/* --- Trainer Section --- */
 .trainer-section {
   padding: 8rem 0;
   background: white;
@@ -619,7 +607,6 @@
   transform: translateY(-3px);
 }
 
-/* Animations */
 @keyframes megaFloat {
   0% {
     transform: translateY(0px) rotate(0deg);
@@ -655,7 +642,6 @@
   animation-delay: 2.5s;
 }
 
-/* --- Tutorials Row --- */
 .tutorials-row {
   padding: 4rem 0;
   background: transparent;
@@ -709,7 +695,6 @@
 
 
 
-/* --- Career Steps Section --- */
 .career-steps-section {
   padding: 8rem 0;
   background: white;
