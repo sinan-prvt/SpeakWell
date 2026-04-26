@@ -110,7 +110,7 @@ const injectStyles = () => {
     .sw-input::placeholder { color:rgba(248,243,235,0.3); }
     .sw-input option { background:#0f2318; }
     .sw-label { display:block; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:rgba(248,243,235,0.35); margin-bottom:0.45rem; font-weight:500; }
-  `;
+  \`;
   document.head.appendChild(style);
 };
 
@@ -130,7 +130,7 @@ const Reveal = ({ children, dir = "up", delay = 0, className = "" }) => {
   const [ref, vis] = useReveal();
   const anim = vis ? { up:"fadeUp", left:"fadeLeft", right:"fadeRight", zoom:"zoomIn" }[dir] : null;
   return (
-    <div ref={ref} className={className} style={anim ? { animation:`${anim} 0.75s ${delay}ms cubic-bezier(.16,1,.3,1) both` } : { opacity:0 }}>
+    <div ref={ref} className={className} style={anim ? { animation:\`\${anim} 0.75s \${delay}ms cubic-bezier(.16,1,.3,1) both\` } : { opacity:0 }}>
       {children}
     </div>
   );
@@ -174,12 +174,12 @@ const ProfileCard = () => (
       
       {/* Big Profile Image */}
       <div style={{ width:"100%", height:380, position:"relative", borderBottom:"2px solid rgba(212,168,83,0.2)" }}>
-        <img src={shafiProfile} alt="Muhammed Shafi" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center 15%" }} />
+        <img src={shafiProfile} alt="Muhammed Shafi Sir" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center 15%" }} />
         <div style={{ position:"absolute", bottom:0, left:0, right:0, height:100, background:"linear-gradient(to top, var(--forest2), transparent)" }} />
       </div>
 
       <div style={{ padding:"0 2rem 2.5rem", position:"relative", zIndex:1, marginTop:"-2rem" }}>
-        <h3 className="f-play" style={{ fontSize:"2.2rem", fontWeight:900, color:"var(--cream)", marginBottom:6, textShadow:"0 4px 12px rgba(0,0,0,0.5)" }}>Muhammed Shafi</h3>
+        <h3 className="f-play" style={{ fontSize:"2.2rem", fontWeight:900, color:"var(--cream)", marginBottom:6, textShadow:"0 4px 12px rgba(0,0,0,0.5)" }}>Muhammed Shafi Sir</h3>
         <div className="f-bar" style={{ fontSize:"0.8rem", letterSpacing:"2.5px", color:"var(--champagne)", fontWeight:700, marginBottom:"1.5rem" }}>FOUNDER & CEO · SPEAKWELL ACADEMY</div>
         <div style={{ width:50, height:1, background:"linear-gradient(90deg,transparent,var(--champagne),transparent)", margin:"0 auto 1.5rem" }} />
 
@@ -221,7 +221,7 @@ const VoiceNote = ({ name, time, color, quote }) => {
   };
   useEffect(() => () => clearInterval(tmr.current), []);
   const elapsed = Math.floor((prog / 100) * secs);
-  const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  const fmt = s => \`\${Math.floor(s / 60)}:\${String(s % 60).padStart(2, "0")}\`;
   return (
     <div style={{ background:"rgba(212,168,83,0.06)", border:"1px solid rgba(212,168,83,0.15)", borderRadius:14, padding:"1.2rem" }}>
       <div style={{ display:"flex", alignItems:"center", gap:"0.8rem", marginBottom:"0.9rem" }}>
@@ -231,7 +231,7 @@ const VoiceNote = ({ name, time, color, quote }) => {
           <div style={{ fontSize:"0.72rem", color:"rgba(248,243,235,0.35)", marginTop:2 }}>Voice Testimonial • SpeakWell Student</div>
         </div>
         <div style={{ marginLeft:"auto", display:"flex", alignItems:"flex-end", gap:3, height:22 }}>
-          {playing ? [1,2,3,4,5].map(b => <div key={b} className={`wbar${b}`} style={{ width:3, background:"var(--champagne)", borderRadius:2, height:4 }} />) : [8,14,6,18,10,14,8].map((h,i) => <div key={i} style={{ width:2.5, height:h, background:"rgba(212,168,83,0.3)", borderRadius:2 }} />)}
+          {playing ? [1,2,3,4,5].map(b => <div key={b} className={\`wbar\${b}\`} style={{ width:3, background:"var(--champagne)", borderRadius:2, height:4 }} />) : [8,14,6,18,10,14,8].map((h,i) => <div key={i} style={{ width:2.5, height:h, background:"rgba(212,168,83,0.3)", borderRadius:2 }} />)}
         </div>
       </div>
       {quote && <p style={{ fontSize:"0.8rem", color:"rgba(248,243,235,0.5)", fontStyle:"italic", marginBottom:"0.9rem", lineHeight:1.6 }}>"{quote}"</p>}
@@ -241,7 +241,7 @@ const VoiceNote = ({ name, time, color, quote }) => {
         </button>
         <div style={{ flex:1 }}>
           <div style={{ height:4, borderRadius:4, background:"rgba(212,168,83,0.12)", overflow:"hidden", cursor:"pointer" }}>
-            <div style={{ height:"100%", width:`${prog}%`, background:"linear-gradient(90deg,var(--champagne),var(--champ2))", borderRadius:4, transition:"width 0.2s" }} />
+            <div style={{ height:"100%", width:\`\${prog}%\`, background:"linear-gradient(90deg,var(--champagne),var(--champ2))", borderRadius:4, transition:"width 0.2s" }} />
           </div>
           <div style={{ display:"flex", justifyContent:"space-between", marginTop:4 }}>
             <span style={{ fontSize:"0.7rem", color:"rgba(248,243,235,0.3)" }}>{fmt(elapsed)}</span>
@@ -258,11 +258,11 @@ const VideoCard = ({ name, role, quote, accent }) => {
   const [on, setOn] = useState(false);
   return (
     <div className="card-hover" style={{ borderRadius:16, overflow:"hidden", border:"1px solid rgba(212,168,83,0.12)", background:"rgba(22,45,31,0.7)" }}>
-      <div onClick={() => setOn(!on)} style={{ height:180, background:`linear-gradient(145deg, ${accent}18, ${accent}06)`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", cursor:"pointer", position:"relative" }}>
+      <div onClick={() => setOn(!on)} style={{ height:180, background:\`linear-gradient(145deg, \${accent}18, \${accent}06)\`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", cursor:"pointer", position:"relative" }}>
         {on ? (
           <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:12 }}>
             <div style={{ display:"flex", gap:4, alignItems:"flex-end", height:40 }}>
-              {[10,18,8,22,14,20,10,16,8,18].map((h,i) => <div key={i} style={{ width:4, height:h, background:"var(--champagne)", borderRadius:3, animation:`waveBar ${0.4+i*0.07}s ease-in-out infinite ${i*0.04}s` }} />)}
+              {[10,18,8,22,14,20,10,16,8,18].map((h,i) => <div key={i} style={{ width:4, height:h, background:"var(--champagne)", borderRadius:3, animation:\`waveBar \${0.4+i*0.07}s ease-in-out infinite \${i*0.04}s\` }} />)}
             </div>
             <span style={{ fontSize:"0.75rem", color:"rgba(248,243,235,0.5)" }}>Playing video…</span>
           </div>
@@ -272,7 +272,7 @@ const VideoCard = ({ name, role, quote, accent }) => {
             <span style={{ fontSize:"0.72rem", color:"rgba(248,243,235,0.4)", marginTop:10 }}>Tap to watch</span>
           </>
         )}
-        <span style={{ position:"absolute", top:12, left:12, fontSize:"0.65rem", fontWeight:700, letterSpacing:2, textTransform:"uppercase", background:`${accent}33`, color:accent, padding:"3px 9px", borderRadius:100 }}>Video</span>
+        <span style={{ position:"absolute", top:12, left:12, fontSize:"0.65rem", fontWeight:700, letterSpacing:2, textTransform:"uppercase", background:\`\${accent}33\`, color:accent, padding:"3px 9px", borderRadius:100 }}>Video</span>
         {on && <button onClick={e=>{e.stopPropagation();setOn(false);}} style={{ position:"absolute", top:10, right:10, width:26, height:26, borderRadius:"50%", background:"rgba(0,0,0,0.4)", border:"none", color:"rgba(248,243,235,0.6)", cursor:"pointer", fontSize:"0.75rem" }}>✕</button>}
       </div>
       <div style={{ padding:"1.1rem 1.2rem" }}>
@@ -294,7 +294,7 @@ const VideoCard = ({ name, role, quote, accent }) => {
 const CourseCard = ({ icon, label, title, body, meta, i }) => (
   <Reveal dir="up" delay={i * 70} className="card-hover h-full" style={{ display:"flex" }}>
     <div style={{ background:"var(--forest2)", border:"1px solid rgba(212,168,83,0.1)", borderRadius:14, padding:"1.6rem", display:"flex", flexDirection:"column", height:"100%", position:"relative", overflow:"hidden" }}>
-      <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:`linear-gradient(90deg,transparent,var(--champagne),transparent)`, opacity:0.5 }} />
+      <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:\`linear-gradient(90deg,transparent,var(--champagne),transparent)\`, opacity:0.5 }} />
       <div style={{ fontSize:"1.8rem", marginBottom:"0.8rem" }}>{icon}</div>
       <span style={{ fontSize:"0.62rem", fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"var(--champagne)", marginBottom:"0.6rem", display:"block" }}>{label}</span>
       <h3 className="f-play" style={{ fontSize:"1.1rem", fontWeight:700, marginBottom:"0.7rem", color:"var(--cream)", lineHeight:1.25 }}>{title}</h3>
@@ -328,30 +328,30 @@ export default function SpeakWell() {
   const COURSES = [
     { icon:"🗣️", label:"Beginner", title:"Spoken English Foundation", body:"Build pronunciation, grammar and daily vocabulary from zero — with the confidence to speak on day one.", meta:[["⏱","3 Months"],["📡","Online/Offline"]] },
     { icon:"💼", label:"Professional", title:"Business English Mastery", body:"Emails, meetings, presentations and corporate negotiations — communicate like a leader at the workplace.", meta:[["⏱","2 Months"],["📡","Online/Offline"]] },
-    { icon:"🎤", label:"Advanced", title:"Public Speaking & Personality", body:"Stage presence, storytelling, persuasion and powerful body language — Muhammed Shafi's signature course.", meta:[["⏱","6 Weeks"],["📡","Offline"]] },
+    { icon:"🎤", label:"Advanced", title:"Public Speaking & Personality", body:"Stage presence, storytelling, persuasion and powerful body language — Muhammed Shafi Sir's signature course.", meta:[["⏱","6 Weeks"],["📡","Offline"]] },
     { icon:"🎯", label:"Interview Prep", title:"Interview Crash Course", body:"HR rounds, group discussions, mock interviews — everything you need to land your dream job confidently.", meta:[["⏱","4 Weeks"],["📡","Online/Offline"]] },
     { icon:"👦", label:"Kids & Teens", title:"Young Speakers Program", body:"Interactive, fun English for school students — building fluency and love for language from an early age.", meta:[["⏱","3 Months"],["📡","Online/Offline"]] },
     { icon:"⚡", label:"Weekend", title:"Weekend Fluency Bootcamp", body:"For busy professionals — intensive weekend sessions for dramatic improvement in just 8 weeks.", meta:[["⏱","8 Weekends"],["📡","Online/Offline"]] },
   ];
 
   const WRITTEN = [
-    { name:"Arjun Menon", role:"Software Engineer, Kochi", text:"Muhammed Shafi rebuilt my confidence from ground up. Placed in an MNC within 2 months. Truly life-changing.", color:"#d4a853" },
+    { name:"Arjun Menon", role:"Software Engineer, Kochi", text:"Muhammed Shafi Sir rebuilt my confidence from ground up. Placed in an MNC within 2 months. Truly life-changing.", color:"#d4a853" },
     { name:"Priya Nair", role:"Bank Officer, Tirurangadi", text:"From trembling at English to addressing 200 people — SpeakWell Academy is simply life-changing.", color:"#4a9eff" },
-    { name:"Rajan Pillai", role:"Parent, Palakkad", text:"My daughter now leads school debates. Muhammed Shafi has an incredible gift for connecting with students of every age.", color:"#4ade80" },
+    { name:"Rajan Pillai", role:"Parent, Palakkad", text:"My daughter now leads school debates. Muhammed Shafi Sir has an incredible gift for connecting with students of every age.", color:"#4ade80" },
     { name:"Sneha Raj", role:"HR Executive, Bangalore", text:"The Business English course transformed my presentation skills. Got a promotion within 3 months!", color:"#e879f9" },
-    { name:"Mohammed Riyas", role:"Bank PO, Kozhikode", text:"Cleared my Bank PO interview in the very first attempt after Muhammed Shafi's crash course. Incredible teacher.", color:"#fb923c" },
+    { name:"Mohammed Riyas", role:"Bank PO, Kozhikode", text:"Cleared my Bank PO interview in the very first attempt after Muhammed Shafi Sir's crash course. Incredible teacher.", color:"#fb923c" },
     { name:"Divya Krishnan", role:"Student, Tirurangadi", text:"I went from the shyest student to speaking at college events. SpeakWell changed my entire personality.", color:"#22d3ee" },
   ];
 
   const VIDEOS = [
-    { name:"Akhil Thomas", role:"MNC Employee, Pune", quote:"This academy gave me the confidence to speak in board meetings. Muhammed Shafi's approach is unlike anything I've experienced.", accent:"#d4a853" },
+    { name:"Akhil Thomas", role:"MNC Employee, Pune", quote:"This academy gave me the confidence to speak in board meetings. Muhammed Shafi Sir's approach is unlike anything I've experienced.", accent:"#d4a853" },
     { name:"Fathima Beevi", role:"Teacher, Malappuram", quote:"I joined to improve classroom English and ended up transforming my entire communication style completely.", accent:"#4a9eff" },
   ];
 
   const VOICES = [
-    { name:"Vishnu Kumar", time:"1:24", color:"#d4a853", quote:"I was always afraid of English in public. After one month with Muhammed Shafi, I gave a speech at my office annual day." },
-    { name:"Amritha Saji", time:"0:58", color:"#4ade80", quote:"The way Muhammed Shafi teaches — with so much energy and patience — makes you fall in love with English." },
-    { name:"Jithin Mathew", time:"2:10", color:"#fb923c", quote:"SpeakWell is not just a class. It is a transformation. Muhammed Shafi cares about every single student personally." },
+    { name:"Vishnu Kumar", time:"1:24", color:"#d4a853", quote:"I was always afraid of English in public. After one month with Muhammed Shafi Sir, I gave a speech at my office annual day." },
+    { name:"Amritha Saji", time:"0:58", color:"#4ade80", quote:"The way Muhammed Shafi Sir teaches — with so much energy and patience — makes you fall in love with English." },
+    { name:"Jithin Mathew", time:"2:10", color:"#fb923c", quote:"SpeakWell is not just a class. It is a transformation. Muhammed Shafi Sir cares about every single student personally." },
   ];
 
   const S = { // inline style helpers
@@ -371,7 +371,7 @@ export default function SpeakWell() {
       <div style={{ background:"var(--champagne)", overflow:"hidden", padding:"0.45rem 0", position:"relative", zIndex:50 }}>
         <div className="marquee-wrap">
           <div className="marquee-inner">
-            {Array(6).fill("✦ SpeakWell English Academy · Muhammed Shafi · Tirurangadi, Kerala · Online & Offline Classes · Speak With Confidence ").map((t,i) => (
+            {Array(6).fill("✦ SpeakWell English Academy · Muhammed Shafi Sir · Tirurangadi, Kerala · Online & Offline Classes · Speak With Confidence ").map((t,i) => (
               <span key={i} style={{ fontSize:"0.72rem", fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"#0f2318", marginRight:"2rem" }}>{t}</span>
             ))}
           </div>
@@ -428,7 +428,7 @@ export default function SpeakWell() {
       {/* ─── HERO ─── */}
       <section id="home" style={{ minHeight:"calc(100vh - 90px)", display:"flex", alignItems:"center", textAlign:"center", position:"relative", overflow:"hidden" }}>
         {/* Big BG text */}
-        <div className="f-bar" style={{ position:"absolute", bottom:"-2%", left:"50%", transform:"translateX(-50%)", fontSize:"clamp(6rem,20vw,24rem)", fontWeight:900, color:"rgba(212,168,83,0.03)", lineHeight:1, userSelect:"none", pointerEvents:"none", letterSpacing:"-4px", whiteSpace:"nowrap" }}>
+        <div className="f-bar" style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%,-50%)", fontSize:"clamp(6rem,20vw,24rem)", fontWeight:900, color:"rgba(212,168,83,0.03)", lineHeight:1, userSelect:"none", pointerEvents:"none", letterSpacing:"-4px", whiteSpace:"nowrap" }}>
           SPEAK WELL
         </div>
 
@@ -458,17 +458,6 @@ export default function SpeakWell() {
             </button>
           </div>
 
-          {/* Stats row */}
-          <div style={{ display:"flex", gap:"3rem", justifyContent:"center", paddingTop:"2.5rem", borderTop:"1px solid rgba(212,168,83,0.1)", animation:"fadeUp 0.6s 0.45s ease both", flexWrap:"wrap" }}>
-            {[["5000","+","Students"],["10","+","Years"],["98","%","Success"]].map(([n,s,l]) => (
-              <div key={l}>
-                <div className="f-play" style={{ fontSize:"2.8rem", fontWeight:900, color:"var(--champagne)", lineHeight:1 }}>
-                  <Counter to={parseInt(n)} suffix={s} />
-                </div>
-                <div style={{ fontSize:"0.75rem", letterSpacing:"2px", textTransform:"uppercase", color:"rgba(248,243,235,0.35)", marginTop:6, fontWeight:500 }}>{l}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -480,16 +469,16 @@ export default function SpeakWell() {
         <div style={S.sec}>
           <div style={{ display:"grid", gridTemplateColumns:"1.1fr 0.9fr", gap:"5rem", alignItems:"center" }} className="about-grid">
             <Reveal dir="left">
-              <div style={S.tag}><div style={S.tagLine} />About Muhammed Shafi</div>
+              <div style={S.tag}><div style={S.tagLine} />About Muhammed Shafi Sir</div>
               <h2 className="f-play" style={S.h2}>Your Mentor,<br /><span className="champ-text" style={{ fontStyle:"italic" }}>Your Transformation</span></h2>
-              <p style={S.sub}>Muhammed Shafi is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
+              <p style={S.sub}>Muhammed Shafi Sir is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
 
               <blockquote style={{ margin:"2rem 0", padding:"1.5rem 1.8rem", borderLeft:"2px solid var(--champagne)", background:"rgba(212,168,83,0.05)", borderRadius:"0 12px 12px 0", position:"relative" }}>
                 <div className="f-play" style={{ fontSize:"5rem", color:"rgba(212,168,83,0.12)", position:"absolute", top:-12, left:12, lineHeight:1 }}>"</div>
                 <p className="f-play" style={{ fontSize:"1.15rem", fontStyle:"italic", color:"rgba(248,243,235,0.85)", lineHeight:1.7, position:"relative", zIndex:1 }}>
                   "English is not just a language — it is the key that unlocks every door of opportunity. I don't just teach words; I teach the courage to use them."
                 </p>
-                <cite className="f-bar" style={{ display:"block", marginTop:"1rem", fontSize:"0.8rem", letterSpacing:"2px", color:"var(--champagne)", fontStyle:"normal", fontWeight:700 }}>— MUHAMMED SHAFI, FOUNDER · SPEAKWELL</cite>
+                <cite className="f-bar" style={{ display:"block", marginTop:"1rem", fontSize:"0.8rem", letterSpacing:"2px", color:"var(--champagne)", fontStyle:"normal", fontWeight:700 }}>— MUHAMMED SHAFI SIR, FOUNDER · SPEAKWELL</cite>
               </blockquote>
 
               <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
@@ -543,7 +532,7 @@ export default function SpeakWell() {
               <div style={S.tag}><div style={S.tagLine} />Why SpeakWell</div>
               <h2 className="f-play" style={S.h2}>What Makes Us<br /><span className="champ-text" style={{ fontStyle:"italic" }}>Different</span></h2>
               <div style={{ marginTop:"2.5rem" }}>
-                {[["01","Muhammed Shafi Teaches Every Class","No junior faculty, no outsourcing — every session conducted personally by Muhammed Shafi himself. You always get the very best."],["02","Activity-Based Real Learning","Role plays, storytelling, debates, group discussions and real-world scenarios — English that is fun, practical and permanent."],["03","Flexible Timings for All","Morning, evening and weekend batches in both online and offline formats — we fit seamlessly into your schedule."],["04","Lifetime Alumni Community","Access our exclusive practice groups, doubt-clearing sessions and continued support even long after you graduate."],["05","Certified & Affordable","World-class training at accessible prices — with a recognized SpeakWell Academy certificate on completion."]].map(([n,h,p]) => (
+                {[["01","Muhammed Shafi Sir Teaches Every Class","No junior faculty, no outsourcing — every session conducted personally by Muhammed Shafi Sir himself. You always get the very best."],["02","Activity-Based Real Learning","Role plays, storytelling, debates, group discussions and real-world scenarios — English that is fun, practical and permanent."],["03","Flexible Timings for All","Morning, evening and weekend batches in both online and offline formats — we fit seamlessly into your schedule."],["04","Lifetime Alumni Community","Access our exclusive practice groups, doubt-clearing sessions and continued support even long after you graduate."],["05","Certified & Affordable","World-class training at accessible prices — with a recognized SpeakWell Academy certificate on completion."]].map(([n,h,p]) => (
                   <div key={n} style={{ display:"grid", gridTemplateColumns:"60px 1fr", gap:"1.2rem", paddingBottom:"1.5rem", marginBottom:"1.5rem", borderBottom:"1px solid rgba(212,168,83,0.08)" }}
                     onMouseEnter={e=>e.currentTarget.querySelector(".why-num").style.color="var(--champagne)"}
                     onMouseLeave={e=>e.currentTarget.querySelector(".why-num").style.color="rgba(212,168,83,0.15)"}>
@@ -560,7 +549,7 @@ export default function SpeakWell() {
             <Reveal dir="right">
               <div style={{ display:"flex", flexDirection:"column", gap:"1.2rem" }}>
                 {[{ title:"💻 Online Classes", col:"#4a9eff", feats:["Live Zoom / Google Meet sessions","Recorded class access anytime","WhatsApp practice group","Digital study materials","Online mock sessions & feedback"] },
-                  { title:"🏫 Offline Classes", col:"var(--champagne)", feats:["Face-to-face with Muhammed Shafi","In-person debates & discussions","Live mock interviews","Activity-based group sessions","Study material provided"] }
+                  { title:"🏫 Offline Classes", col:"var(--champagne)", feats:["Face-to-face with Muhammed Shafi Sir","In-person debates & discussions","Live mock interviews","Activity-based group sessions","Study material provided"] }
                 ].map(m => (
                   <div key={m.title} className="card-hover" style={{ borderRadius:16, padding:"2rem", border:`1px solid ${m.col}33`, background:`${m.col}08` }}>
                     <h3 className="f-play" style={{ fontSize:"1.35rem", fontWeight:700, color:"var(--cream)", marginBottom:"1.2rem" }}>{m.title}</h3>
@@ -588,7 +577,7 @@ export default function SpeakWell() {
           {/* Tabs */}
           <Reveal dir="up" delay={100} style={{ display:"flex", justifyContent:"center", marginBottom:"3rem" }}>
             <div style={{ display:"flex", gap:5, padding:6, borderRadius:12, background:"rgba(212,168,83,0.06)", border:"1px solid rgba(212,168,83,0.15)" }}>
-              {[["written","💬 Written"+(` (${WRITTEN.length})`),],["video","🎬 Videos"+(` (${VIDEOS.length})`),],["voice","🎙️ Voice Notes"+(` (${VOICES.length})`),]].map(([id,lbl]) => (
+              {[["written","💬 Written"+(\` (\${WRITTEN.length})\`)],["video","🎬 Videos"+(\` (\${VIDEOS.length})\`)],["voice","🎙️ Voice Notes"+(\` (\${VOICES.length})\`)]].map(([id,lbl]) => (
                 <button key={id} onClick={()=>setFeedTab(id)} className="f-bar" style={{ padding:"0.7rem 1.4rem", borderRadius:8, fontSize:"0.85rem", letterSpacing:"1px", border:"none", cursor:"pointer", transition:"all 0.3s", background: feedTab===id ? "linear-gradient(135deg,var(--champagne),var(--champ2))" : "transparent", color: feedTab===id ? "var(--forest)" : "rgba(248,243,235,0.5)", fontWeight:700 }}>
                   {lbl}
                 </button>
@@ -647,7 +636,7 @@ export default function SpeakWell() {
               🎓 BOOK FREE DEMO CLASS
             </button>
             <a href="tel:+919999999999" className="f-bar" style={{ padding:"1.1rem 2.2rem", borderRadius:4, fontSize:"1.1rem", letterSpacing:"1.5px", border:"2.5px solid rgba(15,35,24,0.25)", color:"var(--forest)", textDecoration:"none", fontWeight:700, display:"inline-flex", alignItems:"center", gap:8 }}>
-              📞 CALL MUHAMMED SHAFI
+              📞 CALL MUHAMMED SHAFI SIR
             </a>
           </div>
         </Reveal>
@@ -687,7 +676,7 @@ export default function SpeakWell() {
                   <div style={{ textAlign:"center", padding:"3rem 0" }}>
                     <div style={{ fontSize:"4rem", marginBottom:"1rem" }}>✅</div>
                     <h4 className="f-play" style={{ fontSize:"1.8rem", fontWeight:900, color:"var(--champagne)", marginBottom:8 }}>Enquiry Sent!</h4>
-                    <p style={{ fontSize:"0.9rem", color:"rgba(248,243,235,0.5)" }}>Muhammed Shafi's team will contact you shortly. Welcome to the SpeakWell family!</p>
+                    <p style={{ fontSize:"0.9rem", color:"rgba(248,243,235,0.5)" }}>Muhammed Shafi Sir's team will contact you shortly. Welcome to the SpeakWell family!</p>
                   </div>
                 ) : (
                   <>
@@ -710,7 +699,7 @@ export default function SpeakWell() {
                         </select>
                       </div>
                     </div>
-                    <div style={{ marginBottom:"1.5rem" }}><label className="sw-label">Message (Optional)</label><textarea rows={3} placeholder="Your goals or questions for Muhammed Shafi…" className="sw-input" style={{ resize:"vertical" }} /></div>
+                    <div style={{ marginBottom:"1.5rem" }}><label className="sw-label">Message (Optional)</label><textarea rows={3} placeholder="Your goals or questions for Muhammed Shafi Sir…" className="sw-input" style={{ resize:"vertical" }} /></div>
                     <button onClick={()=>setFormSent(true)} className="btn-champ f-bar" style={{ width:"100%", padding:"1.1rem", borderRadius:8, fontSize:"1.1rem", letterSpacing:"1.5px" }}>
                       SEND ENQUIRY & BOOK DEMO →
                     </button>
@@ -740,14 +729,14 @@ export default function SpeakWell() {
             </div>
           </div>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:"2rem", flexWrap:"wrap", gap:"1rem" }}>
-            <p style={{ fontSize:"0.75rem", color:"rgba(248,243,235,0.2)" }}>© 2024 SpeakWell English Academy · Founded by Muhammed Shafi · Tirurangadi, Kerala, India</p>
+            <p style={{ fontSize:"0.75rem", color:"rgba(248,243,235,0.2)" }}>© 2024 SpeakWell English Academy · Founded by Muhammed Shafi Sir · Tirurangadi, Kerala, India</p>
             <p style={{ fontSize:"0.75rem", color:"rgba(212,168,83,0.35)" }}>Empowering every voice in Kerala 🇮🇳</p>
           </div>
         </div>
       </footer>
 
       {/* ─── RESPONSIVE OVERRIDES ─── */}
-      <style>{`
+      <style>{\`
         @media (max-width: 768px) {
           .hidden-mobile { display: none !important; }
           .show-mobile   { display: flex !important; }
@@ -767,7 +756,7 @@ export default function SpeakWell() {
           .courses-grid { grid-template-columns: repeat(2,1fr) !important; }
           .reviews-grid { grid-template-columns: repeat(2,1fr) !important; }
         }
-      `}</style>
+      \`}</style>
     </div>
   );
 }
