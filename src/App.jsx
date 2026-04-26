@@ -195,7 +195,7 @@ const ProfileCard = () => {
         </div>
 
         <div style={{ padding: "0 2rem 2rem", position: "relative", zIndex: 1, transform: "translateZ(30px)" }}>
-          <h3 className="f-play" style={{ fontSize: "2rem", fontWeight: 900, color: "var(--cream)", marginBottom: 4, textShadow: "0 4px 12px rgba(0,0,0,0.5)" }}>Muhammed Shafi Sir</h3>
+          <h3 className="f-play" style={{ fontSize: "2rem", fontWeight: 900, color: "var(--cream)", marginBottom: 4, textShadow: "0 4px 12px rgba(0,0,0,0.5)" }}>Mr. Muhammed Shafi Sir</h3>
           <div className="f-bar" style={{ fontSize: "0.75rem", letterSpacing: "2px", color: "var(--champagne)", fontWeight: 700, marginBottom: "1.2rem" }}>FOUNDER & CEO · SPEAKWELL ENGLISH ACADEMY</div>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", marginBottom: "1.5rem", transform: "translateZ(20px)" }}>
@@ -484,16 +484,16 @@ export default function SpeakWell() {
         <div style={S.sec}>
           <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "5rem", alignItems: "center" }} className="about-grid">
             <Reveal dir="up">
-              <div style={S.tag}><div style={S.tagLine} />About Muhammed Shafi Sir</div>
+              <div style={S.tag}><div style={S.tagLine} />About Mr. Muhammed Shafi Sir</div>
               <h2 className="f-play about-h2" style={{ ...S.h2, fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.1, wordBreak: "break-word" }}>Your Mentor,<br /><span className="champ-text" style={{ fontStyle: "italic" }}>Your Transformation</span></h2>
-              <p style={{ ...S.sub, fontSize: "1.1rem" }}>Muhammed Shafi Sir is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
+              <p style={{ ...S.sub, fontSize: "1.1rem" }}>Mr. Muhammed Shafi Sir is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
 
               <blockquote className="about-quote" style={{ margin: "2.5rem 0", padding: "1.5rem 2rem", background: "linear-gradient(90deg, rgba(212,168,83,0.08), transparent)", borderLeft: "3px solid var(--champagne)", borderRadius: "0 16px 16px 0", position: "relative", boxShadow: "-5px 0 20px rgba(212,168,83,0.05)" }}>
                 <div className="f-play" style={{ fontSize: "6rem", color: "rgba(212,168,83,0.15)", position: "absolute", top: -15, left: 10, lineHeight: 1, pointerEvents: "none" }}>"</div>
                 <p className="f-play about-quote-text" style={{ fontSize: "1.25rem", fontStyle: "italic", color: "rgba(248,243,235,0.9)", lineHeight: 1.6, position: "relative", zIndex: 1, whiteSpace: "normal", wordBreak: "break-word" }}>
                   "English is not just a language — it is the key that unlocks every door of opportunity. I don't just teach words; I teach the courage to use them."
                 </p>
-                <cite className="f-bar" style={{ display: "block", marginTop: "1.2rem", fontSize: "0.75rem", letterSpacing: "3px", color: "var(--champagne)", fontStyle: "normal", fontWeight: 700 }}>— MUHAMMED SHAFI SIR, FOUNDER · SPEAKWELL ENGLISH ACADEMY</cite>
+                <cite className="f-bar" style={{ display: "block", marginTop: "1.2rem", fontSize: "0.75rem", letterSpacing: "3px", color: "var(--champagne)", fontStyle: "normal", fontWeight: 700 }}>— MR. MUHAMMED SHAFI SIR, FOUNDER · SPEAKWELL ENGLISH ACADEMY</cite>
               </blockquote>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }} className="about-tags-list">
@@ -762,7 +762,7 @@ export default function SpeakWell() {
             </div>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "2rem", flexWrap: "wrap", gap: "1rem" }}>
-            <p style={{ fontSize: "0.75rem", color: "rgba(248,243,235,0.2)" }}>© 2024 SpeakWell English Academy · Founded by Muhammed Shafi Sir · Tirurangadi, Kerala, India</p>
+            <p style={{ fontSize: "0.75rem", color: "rgba(248,243,235,0.2)" }}>© 2024 SpeakWell English Academy · Founded by Mr. Muhammed Shafi Sir · Tirurangadi, Kerala, India</p>
             <p style={{ fontSize: "0.75rem", color: "rgba(212,168,83,0.35)" }}>Empowering every voice in Kerala 🇮🇳</p>
           </div>
         </div>
