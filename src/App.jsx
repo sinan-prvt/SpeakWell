@@ -126,11 +126,11 @@ const useReveal = (threshold = 0.12) => {
   return [ref, vis];
 };
 
-const Reveal = ({ children, dir = "up", delay = 0, className = "" }) => {
+const Reveal = ({ children, dir = "up", delay = 0, className = "", style = {} }) => {
   const [ref, vis] = useReveal();
   const anim = vis ? { up:"fadeUp", left:"fadeLeft", right:"fadeRight", zoom:"zoomIn" }[dir] : null;
   return (
-    <div ref={ref} className={className} style={anim ? { animation:`${anim} 0.75s ${delay}ms cubic-bezier(.16,1,.3,1) both` } : { opacity:0 }}>
+    <div ref={ref} className={className} style={{ ...style, ...(anim ? { animation:`${anim} 0.75s ${delay}ms cubic-bezier(.16,1,.3,1) both` } : { opacity:0 }) }}>
       {children}
     </div>
   );
@@ -168,45 +168,58 @@ const Counter = ({ to, suffix = "" }) => {
 };
 
 /* ─── PROFILE CARD ─── */
-const ProfileCard = () => (
-  <div className="float-anim" style={{ position:"relative", zIndex:10 }}>
-    <div style={{ width:340, background:"var(--forest2)", borderRadius:24, textAlign:"center", border:"1px solid rgba(212,168,83,0.2)", boxShadow:"0 40px 80px rgba(0,0,0,0.6)", position:"relative", overflow:"hidden" }}>
-      
-      {/* Big Profile Image */}
-      <div style={{ width:"100%", height:380, position:"relative", borderBottom:"2px solid rgba(212,168,83,0.2)" }}>
-        <img src={shafiProfile} alt="Muhammed Shafi Sir" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center 15%" }} />
-        <div style={{ position:"absolute", bottom:0, left:0, right:0, height:100, background:"linear-gradient(to top, var(--forest2), transparent)" }} />
-      </div>
+const ProfileCard = () => {
+  const [rot, setRot] = useState({x:0,y:0});
+  const handleMove = e => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    setRot({x: -y/15, y: x/15});
+  };
 
-      <div style={{ padding:"0 2rem 2.5rem", position:"relative", zIndex:1, marginTop:"-2rem" }}>
-        <h3 className="f-play" style={{ fontSize:"2.2rem", fontWeight:900, color:"var(--cream)", marginBottom:6, textShadow:"0 4px 12px rgba(0,0,0,0.5)" }}>Muhammed Shafi Sir</h3>
-        <div className="f-bar" style={{ fontSize:"0.8rem", letterSpacing:"2.5px", color:"var(--champagne)", fontWeight:700, marginBottom:"1.5rem" }}>FOUNDER & CEO · SPEAKWELL ACADEMY</div>
-        <div style={{ width:50, height:1, background:"linear-gradient(90deg,transparent,var(--champagne),transparent)", margin:"0 auto 1.5rem" }} />
-
-        <div style={{ display:"flex", flexWrap:"wrap", gap:8, justifyContent:"center", marginBottom:"1.8rem" }}>
-          {["English Trainer","Speaker","CEO","Mentor"].map(t => (
-            <span key={t} style={{ fontSize:"0.65rem", fontWeight:700, letterSpacing:"1.5px", textTransform:"uppercase", padding:"5px 12px", borderRadius:100, background:"rgba(212,168,83,0.08)", border:"1px solid rgba(212,168,83,0.2)", color:"var(--champagne)" }}>{t}</span>
-          ))}
+  return (
+    <div style={{ position:"relative", zIndex:10, perspective: 1000 }} onMouseMove={handleMove} onMouseLeave={()=>{setRot({x:0,y:0})}}>
+      <div style={{ position:"absolute", top:"50%", left:"50%", width:"80%", height:"80%", background:"var(--champagne)", filter:"blur(80px)", opacity:0.15, transform:"translate(-50%,-50%)", zIndex:-1, borderRadius:"50%" }} />
+      <div style={{ 
+        width:340, background:"rgba(22,45,31,0.6)", backdropFilter:"blur(12px)", borderRadius:24, textAlign:"center", border:"1px solid rgba(212,168,83,0.3)", 
+        boxShadow:"0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)", position:"relative",
+        transform: `rotateX(${rot.x}deg) rotateY(${rot.y}deg)`, transition: "transform 0.15s ease-out", transformStyle:"preserve-3d"
+      }}>
+        
+        {/* Big Profile Image */}
+        <div style={{ width:"100%", height:340, position:"relative", padding:"1rem" }}>
+          <div style={{ width:"100%", height:"100%", borderRadius:16, overflow:"hidden", position:"relative", boxShadow:"0 10px 30px rgba(0,0,0,0.5)" }}>
+            <img src={shafiProfile} alt="Muhammed Shafi Sir" style={{ width:"100%", height:"100%", objectFit:"cover", objectPosition:"center 15%", transform:"scale(1.05)", transition:"transform 0.3s" }} />
+            <div style={{ position:"absolute", inset:0, background:"linear-gradient(to top, rgba(22,45,31,0.95) 5%, transparent 60%)" }} />
+          </div>
         </div>
 
-        {/* Stars */}
-        <div style={{ color:"#f0cc7a", fontSize:"1rem" }}>
-          ★★★★★ <span style={{ fontSize:"0.75rem", color:"rgba(248,243,235,0.4)", marginLeft:6 }}>4.9 / 5.0</span>
+        <div style={{ padding:"0 2rem 2rem", position:"relative", zIndex:1, transform:"translateZ(30px)" }}>
+          <h3 className="f-play" style={{ fontSize:"2rem", fontWeight:900, color:"var(--cream)", marginBottom:4, textShadow:"0 4px 12px rgba(0,0,0,0.5)" }}>Muhammed Shafi Sir</h3>
+          <div className="f-bar" style={{ fontSize:"0.75rem", letterSpacing:"2px", color:"var(--champagne)", fontWeight:700, marginBottom:"1.2rem" }}>FOUNDER & CEO · SPEAKWELL ENGLISH ACADEMY</div>
+          
+          <div style={{ display:"flex", flexWrap:"wrap", gap:6, justifyContent:"center", marginBottom:"1.5rem", transform:"translateZ(20px)" }}>
+            {["English Trainer","Speaker","CEO","Mentor"].map(t => (
+              <span key={t} style={{ fontSize:"0.6rem", fontWeight:700, letterSpacing:"1.5px", textTransform:"uppercase", padding:"4px 10px", borderRadius:100, background:"rgba(212,168,83,0.1)", border:"1px solid rgba(212,168,83,0.2)", color:"var(--champagne)" }}>{t}</span>
+            ))}
+          </div>
+
+          <div style={{ width:40, height:2, background:"var(--champagne)", margin:"0 auto", borderRadius:2 }} />
+        </div>
+
+        {/* Floating pills */}
+        <div style={{ position:"absolute", top:30, right:-25, background:"rgba(15,35,24,0.85)", backdropFilter:"blur(8px)", border:"1px solid rgba(212,168,83,0.4)", borderRadius:12, padding:"0.8rem 1rem", fontSize:"0.8rem", boxShadow:"0 15px 35px rgba(0,0,0,0.5)", animation:"floatY 3.5s ease-in-out infinite 0.5s", zIndex:2, transform:"translateZ(50px)" }}>
+          <div className="f-play" style={{ fontSize:"1.4rem", fontWeight:900, color:"var(--champagne)", lineHeight:1 }}>500+</div>
+          <div style={{ color:"rgba(248,243,235,0.6)", fontSize:"0.7rem", fontWeight:500, marginTop:4 }}>Live Sessions</div>
+        </div>
+        <div style={{ position:"absolute", bottom:45, left:-35, background:"rgba(15,35,24,0.85)", backdropFilter:"blur(8px)", border:"1px solid rgba(212,168,83,0.4)", borderRadius:12, padding:"0.8rem 1rem", fontSize:"0.8rem", boxShadow:"0 15px 35px rgba(0,0,0,0.5)", animation:"floatY 3.5s ease-in-out infinite 1.5s", zIndex:2, transform:"translateZ(60px)" }}>
+          <div className="f-play" style={{ fontSize:"1.4rem", fontWeight:900, color:"var(--champagne)", lineHeight:1 }}>⭐ 4.9</div>
+          <div style={{ color:"rgba(248,243,235,0.6)", fontSize:"0.7rem", fontWeight:500, marginTop:4 }}>Student Rating</div>
         </div>
       </div>
     </div>
-
-    {/* Floating pills */}
-    <div style={{ position:"absolute", top:25, right:-25, background:"var(--forest)", border:"1px solid rgba(212,168,83,0.4)", borderRadius:12, padding:"0.8rem 1rem", fontSize:"0.8rem", boxShadow:"0 15px 35px rgba(0,0,0,0.5)", animation:"floatY 3.5s ease-in-out infinite 0.5s", zIndex:2 }}>
-      <div className="f-play" style={{ fontSize:"1.4rem", fontWeight:900, color:"var(--champagne)", lineHeight:1 }}>500+</div>
-      <div style={{ color:"rgba(248,243,235,0.6)", fontSize:"0.7rem", fontWeight:500 }}>Live Sessions</div>
-    </div>
-    <div style={{ position:"absolute", bottom:45, left:-35, background:"var(--forest)", border:"1px solid rgba(212,168,83,0.4)", borderRadius:12, padding:"0.8rem 1rem", fontSize:"0.8rem", boxShadow:"0 15px 35px rgba(0,0,0,0.5)", animation:"floatY 3.5s ease-in-out infinite 1.5s", zIndex:2 }}>
-      <div className="f-play" style={{ fontSize:"1.4rem", fontWeight:900, color:"var(--champagne)", lineHeight:1 }}>⭐ 4.9</div>
-      <div style={{ color:"rgba(248,243,235,0.6)", fontSize:"0.7rem", fontWeight:500 }}>Student Rating</div>
-    </div>
-  </div>
-);
+  );
+};
 
 /* ─── VOICE NOTE ─── */
 const VoiceNote = ({ name, time, color, quote }) => {
@@ -470,22 +483,22 @@ export default function SpeakWell() {
           <div style={{ display:"grid", gridTemplateColumns:"1.1fr 0.9fr", gap:"5rem", alignItems:"center" }} className="about-grid">
             <Reveal dir="left">
               <div style={S.tag}><div style={S.tagLine} />About Muhammed Shafi Sir</div>
-              <h2 className="f-play" style={S.h2}>Your Mentor,<br /><span className="champ-text" style={{ fontStyle:"italic" }}>Your Transformation</span></h2>
-              <p style={S.sub}>Muhammed Shafi Sir is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
+              <h2 className="f-play" style={{ ...S.h2, fontSize:"clamp(2.5rem, 5vw, 4rem)", lineHeight:1.1 }}>Your Mentor,<br /><span className="champ-text" style={{ fontStyle:"italic" }}>Your Transformation</span></h2>
+              <p style={{ ...S.sub, fontSize:"1.1rem" }}>Muhammed Shafi Sir is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
 
-              <blockquote style={{ margin:"2rem 0", padding:"1.5rem 1.8rem", borderLeft:"2px solid var(--champagne)", background:"rgba(212,168,83,0.05)", borderRadius:"0 12px 12px 0", position:"relative" }}>
-                <div className="f-play" style={{ fontSize:"5rem", color:"rgba(212,168,83,0.12)", position:"absolute", top:-12, left:12, lineHeight:1 }}>"</div>
-                <p className="f-play" style={{ fontSize:"1.15rem", fontStyle:"italic", color:"rgba(248,243,235,0.85)", lineHeight:1.7, position:"relative", zIndex:1 }}>
+              <blockquote style={{ margin:"2.5rem 0", padding:"1.5rem 2rem", background:"linear-gradient(90deg, rgba(212,168,83,0.08), transparent)", borderLeft:"3px solid var(--champagne)", borderRadius:"0 16px 16px 0", position:"relative", boxShadow:"-5px 0 20px rgba(212,168,83,0.05)" }}>
+                <div className="f-play" style={{ fontSize:"6rem", color:"rgba(212,168,83,0.15)", position:"absolute", top:-15, left:10, lineHeight:1, pointerEvents:"none" }}>"</div>
+                <p className="f-play" style={{ fontSize:"1.25rem", fontStyle:"italic", color:"rgba(248,243,235,0.9)", lineHeight:1.6, position:"relative", zIndex:1 }}>
                   "English is not just a language — it is the key that unlocks every door of opportunity. I don't just teach words; I teach the courage to use them."
                 </p>
-                <cite className="f-bar" style={{ display:"block", marginTop:"1rem", fontSize:"0.8rem", letterSpacing:"2px", color:"var(--champagne)", fontStyle:"normal", fontWeight:700 }}>— MUHAMMED SHAFI SIR, FOUNDER · SPEAKWELL</cite>
+                <cite className="f-bar" style={{ display:"block", marginTop:"1.2rem", fontSize:"0.75rem", letterSpacing:"3px", color:"var(--champagne)", fontStyle:"normal", fontWeight:700 }}>— MUHAMMED SHAFI SIR, FOUNDER · SPEAKWELL ENGLISH ACADEMY</cite>
               </blockquote>
 
-              <div style={{ display:"flex", flexWrap:"wrap", gap:10 }}>
-                {["🎓 Certified Trainer","🎤 Motivational Speaker","🏢 CEO & Founder","📺 Corporate Expert","🧠 Personality Coach"].map(p => (
-                  <span key={p} style={{ fontSize:"0.8rem", padding:"0.5rem 1.1rem", borderRadius:100, border:"1px solid rgba(212,168,83,0.2)", color:"rgba(248,243,235,0.5)", transition:"all 0.3s", cursor:"default" }}
-                    onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--champagne)";e.currentTarget.style.color="var(--champagne)";}}
-                    onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(212,168,83,0.2)";e.currentTarget.style.color="rgba(248,243,235,0.5)";}}>{p}</span>
+              <div style={{ display:"flex", flexWrap:"wrap", gap:"12px" }}>
+                {["🎓 Certified Trainer","🎤 Motivational Speaker","🏢 CEO & Founder","📺 Corporate Expert","🧠 Personality Coach"].map((p,i) => (
+                  <span key={p} style={{ fontSize:"0.85rem", padding:"0.6rem 1.2rem", borderRadius:100, border:"1px solid rgba(212,168,83,0.2)", color:"rgba(248,243,235,0.7)", background:"rgba(212,168,83,0.03)", transition:"all 0.3s", cursor:"default" }}
+                    onMouseEnter={e=>{e.currentTarget.style.borderColor="var(--champagne)";e.currentTarget.style.color="var(--forest)";e.currentTarget.style.background="var(--champagne)";e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.boxShadow="0 4px 15px rgba(212,168,83,0.4)";}}
+                    onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(212,168,83,0.2)";e.currentTarget.style.color="rgba(248,243,235,0.7)";e.currentTarget.style.background="rgba(212,168,83,0.03)";e.currentTarget.style.transform="translateY(0)";e.currentTarget.style.boxShadow="none";}}>{p}</span>
                 ))}
               </div>
             </Reveal>
@@ -623,8 +636,8 @@ export default function SpeakWell() {
       </section>
 
       {/* ─── CTA BAND ─── */}
-      <div style={{ background:"linear-gradient(135deg,var(--champagne),var(--champ2))", padding:"5rem 1.25rem", textAlign:"center", position:"relative", overflow:"hidden" }}>
-        <div className="f-bar" style={{ position:"absolute", right:"-2%", top:"50%", transform:"translateY(-50%)", fontSize:"clamp(8rem,16vw,18rem)", fontWeight:900, color:"rgba(15,35,24,0.06)", letterSpacing:"-4px", userSelect:"none", lineHeight:1 }}>ENROLL NOW</div>
+      <div style={{ background:"linear-gradient(135deg,var(--champagne),var(--champ2))", padding:"5rem 1.25rem", textAlign:"center", position:"relative", overflow:"hidden", display:"flex", alignItems:"center", justifyContent:"center" }}>
+        <div className="f-bar" style={{ position:"absolute", top:"50%", left:"50%", transform:"translate(-50%, -50%)", fontSize:"clamp(8rem,20vw,24rem)", fontWeight:900, color:"rgba(15,35,24,0.06)", letterSpacing:"-4px", userSelect:"none", pointerEvents:"none", lineHeight:1, whiteSpace:"nowrap" }}>ENROLL NOW</div>
         <Reveal dir="up" style={{ position:"relative", zIndex:1 }}>
           <h2 className="f-play" style={{ fontSize:"clamp(2.2rem,5vw,3.5rem)", fontWeight:900, color:"var(--forest)", marginBottom:"1rem" }}>
             Start Your Journey Today
