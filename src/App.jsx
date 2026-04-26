@@ -402,7 +402,7 @@ export default function SpeakWell() {
       <div style={{ background: "var(--champagne)", overflow: "hidden", padding: "0.45rem 0", position: "relative", zIndex: 50 }}>
         <div className="marquee-wrap">
           <div className="marquee-inner">
-            {Array(6).fill("✦ SpeakWell English Academy · Conducted by Muhammed Shafi Sir · Tirurangadi, Kerala · SPECIAL OFFER: ONLINE SPOKEN ENGLISH CLASS JUST ₹499 · Speak With Confidence ").map((t, i) => (
+            {Array(6).fill("✦ SpeakWell English Academy · Conducted by Muhammed Shafi Sir · Tirurangadi, Kerala · SPECIAL OFFER: ONLINE SPOKEN ENGLISH CLASS JUST ₹699 · Speak With Confidence ").map((t, i) => (
               <span key={i} style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", color: "#0f2318", marginRight: "2rem" }}>{t}</span>
             ))}
           </div>
