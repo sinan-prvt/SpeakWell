@@ -321,8 +321,9 @@ const CourseCard = ({ icon, label, title, body, meta, i }) => (
 
 const Preloader = () => (
   <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "#0f2318", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1.5rem" }}>
-    <div className="f-play float-anim" style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--champagne)" }}>
+    <div className="f-play float-anim" style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--champagne)", textAlign: "center" }}>
       Speak<span style={{ color: "var(--cream)" }}>Well</span>
+      <div className="f-bar" style={{ fontSize: "0.8rem", letterSpacing: "4px", color: "rgba(248,243,235,0.3)", fontWeight: 500, marginTop: 4, textTransform: "uppercase" }}>English Academy</div>
     </div>
     <div style={{ width: 140, height: 2, background: "rgba(212,168,83,0.1)", borderRadius: 10, overflow: "hidden", position: "relative" }}>
       <div style={{ position: "absolute", top: 0, left: 0, height: "100%", background: "var(--champagne)", width: "100%", animation: "drawLine 1.2s ease-in-out infinite" }} />
