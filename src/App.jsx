@@ -110,7 +110,7 @@ const injectStyles = () => {
     .sw-input::placeholder { color:rgba(248,243,235,0.3); }
     .sw-input option { background:#0f2318; }
     .sw-label { display:block; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:rgba(248,243,235,0.35); margin-bottom:0.45rem; font-weight:500; }
-  \`;
+  `;
   document.head.appendChild(style);
 };
 
@@ -130,7 +130,7 @@ const Reveal = ({ children, dir = "up", delay = 0, className = "" }) => {
   const [ref, vis] = useReveal();
   const anim = vis ? { up:"fadeUp", left:"fadeLeft", right:"fadeRight", zoom:"zoomIn" }[dir] : null;
   return (
-    <div ref={ref} className={className} style={anim ? { animation:\`\${anim} 0.75s \${delay}ms cubic-bezier(.16,1,.3,1) both\` } : { opacity:0 }}>
+    <div ref={ref} className={className} style={anim ? { animation:`${anim} 0.75s ${delay}ms cubic-bezier(.16,1,.3,1) both` } : { opacity:0 }}>
       {children}
     </div>
   );
@@ -221,7 +221,7 @@ const VoiceNote = ({ name, time, color, quote }) => {
   };
   useEffect(() => () => clearInterval(tmr.current), []);
   const elapsed = Math.floor((prog / 100) * secs);
-  const fmt = s => \`\${Math.floor(s / 60)}:\${String(s % 60).padStart(2, "0")}\`;
+  const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
   return (
     <div style={{ background:"rgba(212,168,83,0.06)", border:"1px solid rgba(212,168,83,0.15)", borderRadius:14, padding:"1.2rem" }}>
       <div style={{ display:"flex", alignItems:"center", gap:"0.8rem", marginBottom:"0.9rem" }}>
@@ -231,7 +231,7 @@ const VoiceNote = ({ name, time, color, quote }) => {
           <div style={{ fontSize:"0.72rem", color:"rgba(248,243,235,0.35)", marginTop:2 }}>Voice Testimonial • SpeakWell Student</div>
         </div>
         <div style={{ marginLeft:"auto", display:"flex", alignItems:"flex-end", gap:3, height:22 }}>
-          {playing ? [1,2,3,4,5].map(b => <div key={b} className={\`wbar\${b}\`} style={{ width:3, background:"var(--champagne)", borderRadius:2, height:4 }} />) : [8,14,6,18,10,14,8].map((h,i) => <div key={i} style={{ width:2.5, height:h, background:"rgba(212,168,83,0.3)", borderRadius:2 }} />)}
+          {playing ? [1,2,3,4,5].map(b => <div key={b} className={`wbar${b}`} style={{ width:3, background:"var(--champagne)", borderRadius:2, height:4 }} />) : [8,14,6,18,10,14,8].map((h,i) => <div key={i} style={{ width:2.5, height:h, background:"rgba(212,168,83,0.3)", borderRadius:2 }} />)}
         </div>
       </div>
       {quote && <p style={{ fontSize:"0.8rem", color:"rgba(248,243,235,0.5)", fontStyle:"italic", marginBottom:"0.9rem", lineHeight:1.6 }}>"{quote}"</p>}
@@ -241,7 +241,7 @@ const VoiceNote = ({ name, time, color, quote }) => {
         </button>
         <div style={{ flex:1 }}>
           <div style={{ height:4, borderRadius:4, background:"rgba(212,168,83,0.12)", overflow:"hidden", cursor:"pointer" }}>
-            <div style={{ height:"100%", width:\`\${prog}%\`, background:"linear-gradient(90deg,var(--champagne),var(--champ2))", borderRadius:4, transition:"width 0.2s" }} />
+            <div style={{ height:"100%", width:`${prog}%`, background:"linear-gradient(90deg,var(--champagne),var(--champ2))", borderRadius:4, transition:"width 0.2s" }} />
           </div>
           <div style={{ display:"flex", justifyContent:"space-between", marginTop:4 }}>
             <span style={{ fontSize:"0.7rem", color:"rgba(248,243,235,0.3)" }}>{fmt(elapsed)}</span>
@@ -258,11 +258,11 @@ const VideoCard = ({ name, role, quote, accent }) => {
   const [on, setOn] = useState(false);
   return (
     <div className="card-hover" style={{ borderRadius:16, overflow:"hidden", border:"1px solid rgba(212,168,83,0.12)", background:"rgba(22,45,31,0.7)" }}>
-      <div onClick={() => setOn(!on)} style={{ height:180, background:\`linear-gradient(145deg, \${accent}18, \${accent}06)\`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", cursor:"pointer", position:"relative" }}>
+      <div onClick={() => setOn(!on)} style={{ height:180, background:`linear-gradient(145deg, ${accent}18, ${accent}06)`, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", cursor:"pointer", position:"relative" }}>
         {on ? (
           <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:12 }}>
             <div style={{ display:"flex", gap:4, alignItems:"flex-end", height:40 }}>
-              {[10,18,8,22,14,20,10,16,8,18].map((h,i) => <div key={i} style={{ width:4, height:h, background:"var(--champagne)", borderRadius:3, animation:\`waveBar \${0.4+i*0.07}s ease-in-out infinite \${i*0.04}s\` }} />)}
+              {[10,18,8,22,14,20,10,16,8,18].map((h,i) => <div key={i} style={{ width:4, height:h, background:"var(--champagne)", borderRadius:3, animation:`waveBar ${0.4+i*0.07}s ease-in-out infinite ${i*0.04}s` }} />)}
             </div>
             <span style={{ fontSize:"0.75rem", color:"rgba(248,243,235,0.5)" }}>Playing video…</span>
           </div>
@@ -272,7 +272,7 @@ const VideoCard = ({ name, role, quote, accent }) => {
             <span style={{ fontSize:"0.72rem", color:"rgba(248,243,235,0.4)", marginTop:10 }}>Tap to watch</span>
           </>
         )}
-        <span style={{ position:"absolute", top:12, left:12, fontSize:"0.65rem", fontWeight:700, letterSpacing:2, textTransform:"uppercase", background:\`\${accent}33\`, color:accent, padding:"3px 9px", borderRadius:100 }}>Video</span>
+        <span style={{ position:"absolute", top:12, left:12, fontSize:"0.65rem", fontWeight:700, letterSpacing:2, textTransform:"uppercase", background:`${accent}33`, color:accent, padding:"3px 9px", borderRadius:100 }}>Video</span>
         {on && <button onClick={e=>{e.stopPropagation();setOn(false);}} style={{ position:"absolute", top:10, right:10, width:26, height:26, borderRadius:"50%", background:"rgba(0,0,0,0.4)", border:"none", color:"rgba(248,243,235,0.6)", cursor:"pointer", fontSize:"0.75rem" }}>✕</button>}
       </div>
       <div style={{ padding:"1.1rem 1.2rem" }}>
@@ -294,7 +294,7 @@ const VideoCard = ({ name, role, quote, accent }) => {
 const CourseCard = ({ icon, label, title, body, meta, i }) => (
   <Reveal dir="up" delay={i * 70} className="card-hover h-full" style={{ display:"flex" }}>
     <div style={{ background:"var(--forest2)", border:"1px solid rgba(212,168,83,0.1)", borderRadius:14, padding:"1.6rem", display:"flex", flexDirection:"column", height:"100%", position:"relative", overflow:"hidden" }}>
-      <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:\`linear-gradient(90deg,transparent,var(--champagne),transparent)\`, opacity:0.5 }} />
+      <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:`linear-gradient(90deg,transparent,var(--champagne),transparent)`, opacity:0.5 }} />
       <div style={{ fontSize:"1.8rem", marginBottom:"0.8rem" }}>{icon}</div>
       <span style={{ fontSize:"0.62rem", fontWeight:700, letterSpacing:"2px", textTransform:"uppercase", color:"var(--champagne)", marginBottom:"0.6rem", display:"block" }}>{label}</span>
       <h3 className="f-play" style={{ fontSize:"1.1rem", fontWeight:700, marginBottom:"0.7rem", color:"var(--cream)", lineHeight:1.25 }}>{title}</h3>
@@ -549,9 +549,9 @@ export default function SpeakWell() {
             <Reveal dir="right">
               <div style={{ display:"flex", flexDirection:"column", gap:"1.2rem" }}>
                 {[{ title:"💻 Online Classes", col:"#4a9eff", feats:["Live Zoom / Google Meet sessions","Recorded class access anytime","WhatsApp practice group","Digital study materials","Online mock sessions & feedback"] },
-                  { title:"🏫 Offline Classes", col:"var(--champagne)", feats:["Face-to-face with Muhammed Shafi Sir","In-person debates & discussions","Live mock interviews","Activity-based group sessions","Study material provided"] }
+                  { title:"🏫 Offline Classes", col:"#d4a853", feats:["Face-to-face with Muhammed Shafi Sir","In-person debates & discussions","Live mock interviews","Activity-based group sessions","Study material provided"] }
                 ].map(m => (
-                  <div key={m.title} className="card-hover" style={{ borderRadius:16, padding:"2rem", border:`1px solid ${m.col}33`, background:`${m.col}08` }}>
+                  <div key={m.title} className="card-hover" style={{ borderRadius:16, padding:"2rem", border:"1px solid " + m.col + "33", background: m.col + "08" }}>
                     <h3 className="f-play" style={{ fontSize:"1.35rem", fontWeight:700, color:"var(--cream)", marginBottom:"1.2rem" }}>{m.title}</h3>
                     <ul style={{ listStyle:"none", display:"flex", flexDirection:"column", gap:10 }}>
                       {m.feats.map(f => <li key={f} style={{ fontSize:"0.88rem", color:"rgba(248,243,235,0.65)", display:"flex", gap:10 }}><span style={{ color:m.col, flexShrink:0 }}>→</span>{f}</li>)}
@@ -576,9 +576,9 @@ export default function SpeakWell() {
 
           {/* Tabs */}
           <Reveal dir="up" delay={100} style={{ display:"flex", justifyContent:"center", marginBottom:"3rem" }}>
-            <div style={{ display:"flex", gap:5, padding:6, borderRadius:12, background:"rgba(212,168,83,0.06)", border:"1px solid rgba(212,168,83,0.15)" }}>
-              {[["written","💬 Written"+(\` (\${WRITTEN.length})\`)],["video","🎬 Videos"+(\` (\${VIDEOS.length})\`)],["voice","🎙️ Voice Notes"+(\` (\${VOICES.length})\`)]].map(([id,lbl]) => (
-                <button key={id} onClick={()=>setFeedTab(id)} className="f-bar" style={{ padding:"0.7rem 1.4rem", borderRadius:8, fontSize:"0.85rem", letterSpacing:"1px", border:"none", cursor:"pointer", transition:"all 0.3s", background: feedTab===id ? "linear-gradient(135deg,var(--champagne),var(--champ2))" : "transparent", color: feedTab===id ? "var(--forest)" : "rgba(248,243,235,0.5)", fontWeight:700 }}>
+            <div style={{ display:"flex", gap:"10px", padding:"10px", borderRadius:12, background:"rgba(212,168,83,0.06)", border:"1px solid rgba(212,168,83,0.15)" }}>
+              {[["written","💬 Written"+(` (${WRITTEN.length})`)],["video","🎬 Videos"+(` (${VIDEOS.length})`)],["voice","🎙️ Voice Notes"+(` (${VOICES.length})`)]].map(([id,lbl]) => (
+                <button key={id} onClick={()=>setFeedTab(id)} className="f-bar" style={{ padding:"0.7rem 1.4rem", borderRadius:8, fontSize:"0.85rem", letterSpacing:"1px", border:"none", cursor:"pointer", transition:"all 0.3s", background: feedTab===id ? "linear-gradient(135deg,var(--champagne),var(--champ2))" : "transparent", color: feedTab===id ? "var(--forest)" : "rgba(248,243,235,0.5)", fontWeight:700, outline:"none" }}>
                   {lbl}
                 </button>
               ))}
@@ -736,7 +736,7 @@ export default function SpeakWell() {
       </footer>
 
       {/* ─── RESPONSIVE OVERRIDES ─── */}
-      <style>{\`
+      <style>{`
         @media (max-width: 768px) {
           .hidden-mobile { display: none !important; }
           .show-mobile   { display: flex !important; }
@@ -756,7 +756,7 @@ export default function SpeakWell() {
           .courses-grid { grid-template-columns: repeat(2,1fr) !important; }
           .reviews-grid { grid-template-columns: repeat(2,1fr) !important; }
         }
-      \`}</style>
+      `}</style>
     </div>
   );
 }
