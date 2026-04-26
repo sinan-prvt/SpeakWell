@@ -67,8 +67,8 @@ const injectStyles = () => {
     .clip-diag-top  { clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%); }
     .clip-diag-bot  { clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); }
 
-    .marquee-wrap { display:flex; overflow:hidden; }
-    .marquee-inner{ display:flex; animation:marquee 28s linear infinite; white-space:nowrap; }
+    .marquee-wrap { display:flex; overflow:hidden; width: 100%; }
+    .marquee-inner{ display:flex; animation:marquee 28s linear infinite; white-space:nowrap; min-width: max-content; flex-shrink: 0; }
 
     .nav-item { position:relative; }
     .nav-item::after { content:''; position:absolute; bottom:-2px; left:0; width:0; height:1px; background:var(--champagne); transition:width 0.3s; }
@@ -319,9 +319,23 @@ const CourseCard = ({ icon, label, title, body, meta, i }) => (
   </Reveal>
 );
 
+const Preloader = () => (
+  <div style={{ position: "fixed", inset: 0, zIndex: 9999, background: "#0f2318", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "1.5rem" }}>
+    <div className="f-play float-anim" style={{ fontSize: "2.5rem", fontWeight: 900, color: "var(--champagne)" }}>
+      Speak<span style={{ color: "var(--cream)" }}>Well</span>
+    </div>
+    <div style={{ width: 140, height: 2, background: "rgba(212,168,83,0.1)", borderRadius: 10, overflow: "hidden", position: "relative" }}>
+      <div style={{ position: "absolute", top: 0, left: 0, height: "100%", background: "var(--champagne)", width: "100%", animation: "drawLine 1.2s ease-in-out infinite" }} />
+    </div>
+  </div>
+);
+
 /* ═══════════════════════════ MAIN APP ═══════════════════════════ */
+
 export default function SpeakWell() {
   useEffect(injectStyles, []);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => { const t = setTimeout(() => setLoading(false), 800); return () => clearTimeout(t); }, []);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -381,6 +395,7 @@ export default function SpeakWell() {
 
   return (
     <div style={{ background: "var(--forest)", minHeight: "100vh", overflowX: "hidden" }}>
+      {loading && <Preloader />}
 
       {/* ─── MARQUEE STRIP ─── */}
       <div style={{ background: "var(--champagne)", overflow: "hidden", padding: "0.45rem 0", position: "relative", zIndex: 50 }}>
