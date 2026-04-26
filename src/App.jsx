@@ -178,9 +178,9 @@ const ProfileCard = () => {
   };
 
   return (
-    <div style={{ position: "relative", zIndex: 10, perspective: 1000 }} onMouseMove={handleMove} onMouseLeave={() => { setRot({ x: 0, y: 0 }) }}>
+    <div className="profile-card-wrapper" style={{ position: "relative", zIndex: 10, perspective: 1000 }} onMouseMove={handleMove} onMouseLeave={() => { setRot({ x: 0, y: 0 }) }}>
       <div style={{ position: "absolute", top: "50%", left: "50%", width: "80%", height: "80%", background: "var(--champagne)", filter: "blur(80px)", opacity: 0.15, transform: "translate(-50%,-50%)", zIndex: -1, borderRadius: "50%" }} />
-      <div style={{
+      <div className="profile-card-inner" style={{
         width: 340, background: "rgba(22,45,31,0.6)", backdropFilter: "blur(12px)", borderRadius: 24, textAlign: "center", border: "1px solid rgba(212,168,83,0.3)",
         boxShadow: "0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)", position: "relative",
         transform: `rotateX(${rot.x}deg) rotateY(${rot.y}deg)`, transition: "transform 0.15s ease-out", transformStyle: "preserve-3d"
@@ -208,11 +208,11 @@ const ProfileCard = () => {
         </div>
 
         {/* Floating pills */}
-        <div style={{ position: "absolute", top: 30, right: -30, background: "rgba(15,35,24,0.85)", backdropFilter: "blur(8px)", border: "1px solid rgba(212,168,83,0.4)", borderRadius: 12, padding: "0.8rem 1rem", fontSize: "0.8rem", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", animation: "floatY 3.5s ease-in-out infinite 0.5s", zIndex: 2, transform: "translateZ(50px)", textAlign: "center" }}>
+        <div className="profile-badge-right" style={{ position: "absolute", top: 30, right: -30, background: "rgba(15,35,24,0.85)", backdropFilter: "blur(8px)", border: "1px solid rgba(212,168,83,0.4)", borderRadius: 12, padding: "0.8rem 1rem", fontSize: "0.8rem", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", animation: "floatY 3.5s ease-in-out infinite 0.5s", zIndex: 2, transform: "translateZ(50px)", textAlign: "center" }}>
           <div className="f-play" style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--champagne)", lineHeight: 1 }}>100+</div>
           <div style={{ color: "rgba(248,243,235,0.6)", fontSize: "0.65rem", fontWeight: 500, marginTop: 4, letterSpacing: "0.5px" }}>Successful Students</div>
         </div>
-        <div style={{ position: "absolute", bottom: 15, left: -30, background: "rgba(15,35,24,0.85)", backdropFilter: "blur(8px)", border: "1px solid rgba(212,168,83,0.4)", borderRadius: 12, padding: "0.8rem 1rem", fontSize: "0.8rem", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", animation: "floatY 3.5s ease-in-out infinite 1.5s", zIndex: 2, transform: "translateZ(60px)", textAlign: "center" }}>
+        <div className="profile-badge-left" style={{ position: "absolute", bottom: 15, left: -30, background: "rgba(15,35,24,0.85)", backdropFilter: "blur(8px)", border: "1px solid rgba(212,168,83,0.4)", borderRadius: 12, padding: "0.8rem 1rem", fontSize: "0.8rem", boxShadow: "0 15px 35px rgba(0,0,0,0.5)", animation: "floatY 3.5s ease-in-out infinite 1.5s", zIndex: 2, transform: "translateZ(60px)", textAlign: "center" }}>
           <div className="f-play" style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--champagne)", lineHeight: 1 }}>⭐ 10/10</div>
           <div style={{ color: "rgba(248,243,235,0.6)", fontSize: "0.65rem", fontWeight: 500, marginTop: 4, letterSpacing: "0.5px" }}>Student Rating</div>
         </div>
@@ -483,22 +483,22 @@ export default function SpeakWell() {
       <section id="about" style={{ background: "var(--forest)", padding: "0 1.25rem" }}>
         <div style={S.sec}>
           <div style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: "5rem", alignItems: "center" }} className="about-grid">
-            <Reveal dir="left">
+            <Reveal dir="up">
               <div style={S.tag}><div style={S.tagLine} />About Muhammed Shafi Sir</div>
-              <h2 className="f-play" style={{ ...S.h2, fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.1 }}>Your Mentor,<br /><span className="champ-text" style={{ fontStyle: "italic" }}>Your Transformation</span></h2>
+              <h2 className="f-play about-h2" style={{ ...S.h2, fontSize: "clamp(2.5rem, 5vw, 4rem)", lineHeight: 1.1, wordBreak: "break-word" }}>Your Mentor,<br /><span className="champ-text" style={{ fontStyle: "italic" }}>Your Transformation</span></h2>
               <p style={{ ...S.sub, fontSize: "1.1rem" }}>Muhammed Shafi Sir is the visionary Founder & CEO of SpeakWell English Academy — a certified Spoken English Trainer, dynamic Motivational Speaker, and educator who has transformed thousands of lives across Kerala and beyond.</p>
 
-              <blockquote style={{ margin: "2.5rem 0", padding: "1.5rem 2rem", background: "linear-gradient(90deg, rgba(212,168,83,0.08), transparent)", borderLeft: "3px solid var(--champagne)", borderRadius: "0 16px 16px 0", position: "relative", boxShadow: "-5px 0 20px rgba(212,168,83,0.05)" }}>
+              <blockquote className="about-quote" style={{ margin: "2.5rem 0", padding: "1.5rem 2rem", background: "linear-gradient(90deg, rgba(212,168,83,0.08), transparent)", borderLeft: "3px solid var(--champagne)", borderRadius: "0 16px 16px 0", position: "relative", boxShadow: "-5px 0 20px rgba(212,168,83,0.05)" }}>
                 <div className="f-play" style={{ fontSize: "6rem", color: "rgba(212,168,83,0.15)", position: "absolute", top: -15, left: 10, lineHeight: 1, pointerEvents: "none" }}>"</div>
-                <p className="f-play" style={{ fontSize: "1.25rem", fontStyle: "italic", color: "rgba(248,243,235,0.9)", lineHeight: 1.6, position: "relative", zIndex: 1 }}>
+                <p className="f-play about-quote-text" style={{ fontSize: "1.25rem", fontStyle: "italic", color: "rgba(248,243,235,0.9)", lineHeight: 1.6, position: "relative", zIndex: 1, whiteSpace: "normal", wordBreak: "break-word" }}>
                   "English is not just a language — it is the key that unlocks every door of opportunity. I don't just teach words; I teach the courage to use them."
                 </p>
                 <cite className="f-bar" style={{ display: "block", marginTop: "1.2rem", fontSize: "0.75rem", letterSpacing: "3px", color: "var(--champagne)", fontStyle: "normal", fontWeight: 700 }}>— MUHAMMED SHAFI SIR, FOUNDER · SPEAKWELL ENGLISH ACADEMY</cite>
               </blockquote>
 
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "12px" }} className="about-tags-list">
                 {["🎓 Certified Trainer", "🎤 Motivational Speaker", "🏢 CEO & Founder", "📺 Corporate Expert", "🧠 Personality Coach"].map((p, i) => (
-                  <span key={p} style={{ fontSize: "0.85rem", padding: "0.6rem 1.2rem", borderRadius: 100, border: "1px solid rgba(212,168,83,0.2)", color: "rgba(248,243,235,0.7)", background: "rgba(212,168,83,0.03)", transition: "all 0.3s", cursor: "default" }}
+                  <span key={p} className="about-tag-pill" style={{ fontSize: "0.85rem", padding: "0.6rem 1.2rem", borderRadius: 100, border: "1px solid rgba(212,168,83,0.2)", color: "rgba(248,243,235,0.7)", background: "rgba(212,168,83,0.03)", transition: "all 0.3s", cursor: "default" }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--champagne)"; e.currentTarget.style.color = "var(--forest)"; e.currentTarget.style.background = "var(--champagne)"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 4px 15px rgba(212,168,83,0.4)"; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(212,168,83,0.2)"; e.currentTarget.style.color = "rgba(248,243,235,0.7)"; e.currentTarget.style.background = "rgba(212,168,83,0.03)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>{p}</span>
                 ))}
@@ -774,6 +774,15 @@ export default function SpeakWell() {
           .hidden-mobile { display: none !important; }
           .show-mobile   { display: flex !important; }
           .about-grid    { grid-template-columns: 1fr !important; gap: 3rem !important; }
+          .about-grid > div { min-width: 0 !important; width: 100% !important; }
+          .about-h2      { font-size: clamp(1.8rem, 8vw, 2.5rem) !important; line-height: 1.2 !important; word-wrap: break-word !important; }
+          .about-quote   { margin: 2rem 0 !important; padding: 1.2rem !important; border-radius: 12px !important; width: 100% !important; box-sizing: border-box !important; }
+          .about-quote-text { font-size: 1.1rem !important; line-height: 1.5 !important; }
+          .profile-card-wrapper { transform: scale(0.8) !important; transform-origin: center !important; margin: -2rem 0 !important; }
+          .profile-badge-right { right: -10px !important; scale: 0.9; }
+          .profile-badge-left { left: -10px !important; scale: 0.9; }
+          .about-tags-list { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+          .about-tag-pill { font-size: 0.7rem !important; padding: 0.5rem 0.5rem !important; text-align: center !important; border-radius: 8px !important; }
           .why-grid      { grid-template-columns: 1fr !important; gap: 3rem !important; }
           .contact-grid  { grid-template-columns: 1fr !important; gap: 3rem !important; }
           .courses-grid  { grid-template-columns: 1fr !important; }
