@@ -5,8 +5,10 @@ import {
 import shafiProfile from "./assets/shafi_sir.png";
 import Icon from "./components/Icon";
 import ContactForm from "./components/ContactForm";
+import { CarouselDots } from "./components/Carousel";
+import { useCarousel } from "./lib/useCarousel";
 import { Counter, Reveal, SplitReveal, Tilt } from "./components/motion";
-import { scrollToId, setScrollLock, useSmoothScroll } from "./lib/scroll";
+import { scrollToId, setScrollLock, useMedia, useSmoothScroll } from "./lib/scroll";
 import {
   EMAIL, FAQ, FORMATS, FOUNDER, NAV, PHONE, PHONE_TEL, PILLARS, PROGRAMS, REVIEWS, STATS, STEPS, WHATSAPP,
 } from "./data";
@@ -195,12 +197,14 @@ function Stats() {
 
 /* ─── PROGRAMS ─── */
 function Programs() {
+  const ref = useRef(null);
+  const nav = useCarousel(ref);
   return (
     <section id="programs" className="section">
       <div className="container">
         <SectionHead eyebrow="Programs" title="Programs built around" accent="real outcomes."
           sub="Six focused programs — from your first conversation to your next boardroom presentation. Every program runs in flexible morning, evening and weekend batches." />
-        <div className="programs-grid">
+        <div className="programs-grid carousel" ref={ref}>
           {PROGRAMS.map((p, i) => (
             <Reveal key={p.title} delay={(i % 3) * 0.08} className="program-cell">
               <Tilt max={6} className="tilt-fill"><article className={p.featured ? "program spot is-featured" : "program spot"}>
@@ -216,11 +220,12 @@ function Programs() {
                   <div><dt>Format</dt><dd>{p.mode}</dd></div>
                   <div className="full"><dt>Ideal for</dt><dd>{p.ideal}</dd></div>
                 </dl>
-                <button className="program-cta" onClick={() => scrollToId("contact")}>Enquire about this program <Icon name="arrow" size={16} /></button>
+                <button className="program-cta" onClick={() => scrollToId("contact")}>Enquire now <Icon name="arrow" size={16} /></button>
               </article></Tilt>
             </Reveal>
           ))}
         </div>
+        <CarouselDots {...nav} label="Program" />
       </div>
     </section>
   );
@@ -228,12 +233,14 @@ function Programs() {
 
 /* ─── METHOD ─── */
 function Method() {
+  const ref = useRef(null);
+  const nav = useCarousel(ref);
   return (
     <section id="method" className="section section-tint">
       <div className="container">
         <SectionHead center eyebrow="The SpeakWell method" title="Built on practice," accent="not memorisation."
           sub="Fluency comes from speaking — often, with guidance and in a supportive room. Everything about how we teach is designed around that." />
-        <div className="pillars">
+        <div className="pillars carousel" ref={ref}>
           {PILLARS.map((p, i) => (
             <Reveal key={p.title} delay={(i % 3) * 0.08}>
               <div className="spot pillar">
@@ -244,6 +251,7 @@ function Method() {
             </Reveal>
           ))}
         </div>
+        <CarouselDots {...nav} label="Reason" />
       </div>
     </section>
   );
@@ -253,6 +261,7 @@ function Method() {
 function Journey() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+  const nav = useCarousel(ref);
   return (
     <section className="section">
       <div className="container journey">
@@ -260,9 +269,12 @@ function Journey() {
           <SectionHead eyebrow="How it works" title="Your path to" accent="fluent English." sub="A clear, supportive journey from your first enquiry to your certificate — and beyond." />
           <Reveal delay={0.15}><button className="btn btn-primary" onClick={() => scrollToId("contact")}>Start with step one <Icon name="arrow" size={18} /></button></Reveal>
         </div>
-        <ol className="steps" ref={ref}>
-          {STEPS.map((s, i) => <Step key={s.title} s={s} i={i} n={STEPS.length} progress={scrollYProgress} />)}
-        </ol>
+        <div className="steps-col">
+          <ol className="steps carousel" ref={ref}>
+            {STEPS.map((s, i) => <Step key={s.title} s={s} i={i} n={STEPS.length} progress={scrollYProgress} />)}
+          </ol>
+          <CarouselDots {...nav} label="Step" />
+        </div>
       </div>
     </section>
   );
@@ -270,10 +282,11 @@ function Journey() {
 
 function Step({ s, i, n, progress }) {
   const reduce = useReducedMotion();
+  const phone = useMedia("(max-width: 640px)");
   const scale = useTransform(progress, [i / n, 1], [1, 1 - (n - 1 - i) * 0.04]);
   return (
     <li className="step-wrap" style={{ top: `calc(110px + ${i * 22}px)` }}>
-      <motion.div className="step" style={reduce ? undefined : { scale }}>
+      <motion.div className="step" style={reduce || phone ? undefined : { scale }}>
         <span className="step-num">0{i + 1}</span>
         <div>
           <h3>{s.title}</h3>
