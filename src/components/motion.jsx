@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { animate, motion, useInView, useReducedMotion } from "motion/react";
+import { animate, motion, useInView, useMotionValue, useReducedMotion, useSpring } from "motion/react";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -43,6 +43,26 @@ export function SplitReveal({ text, className, delay = 0, stagger = 0.06, as = "
         </span>
       )).flatMap((el, i) => (i ? [" ", el] : [el]))}
     </Tag>
+  );
+}
+
+/* 3D tilt that follows the mouse (ignored on touch screens) */
+export function Tilt({ children, max = 8, className, style }) {
+  const reduce = useReducedMotion();
+  const rx = useMotionValue(0), ry = useMotionValue(0);
+  const srx = useSpring(rx, { stiffness: 200, damping: 20 });
+  const sry = useSpring(ry, { stiffness: 200, damping: 20 });
+  const onMove = (e) => {
+    if (reduce || e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    ry.set(((e.clientX - r.left) / r.width - 0.5) * max * 2);
+    rx.set(-((e.clientY - r.top) / r.height - 0.5) * max * 2);
+  };
+  return (
+    <motion.div className={className} onPointerMove={onMove} onPointerLeave={() => { rx.set(0); ry.set(0); }}
+      style={{ ...style, rotateX: srx, rotateY: sry, transformPerspective: 1000 }}>
+      {children}
+    </motion.div>
   );
 }
 

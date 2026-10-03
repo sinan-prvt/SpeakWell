@@ -5,8 +5,8 @@ import {
 import shafiProfile from "./assets/shafi_sir.png";
 import Icon from "./components/Icon";
 import ContactForm from "./components/ContactForm";
-import { Counter, Reveal, SplitReveal } from "./components/motion";
-import { scrollToId, useSmoothScroll } from "./lib/scroll";
+import { Counter, Reveal, SplitReveal, Tilt } from "./components/motion";
+import { scrollToId, setScrollLock, useSmoothScroll } from "./lib/scroll";
 import {
   EMAIL, FAQ, FORMATS, FOUNDER, NAV, PHONE, PHONE_TEL, PILLARS, PROGRAMS, REVIEWS, STATS, STEPS, WHATSAPP,
 } from "./data";
@@ -46,7 +46,8 @@ function Nav() {
     return () => ob.disconnect();
   }, []);
 
-  const go = (id) => { setOpen(false); scrollToId(id); };
+  const go = (id) => { setOpen(false); setScrollLock(false); scrollToId(id); };
+  useEffect(() => { setScrollLock(open); }, [open]);
 
   return (
     <header className={`nav ${scrolled || open ? "is-scrolled" : ""}`}>
@@ -68,10 +69,23 @@ function Nav() {
       </div>
       <AnimatePresence>
         {open && (
-          <motion.nav className="mobile-menu" aria-label="Mobile" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4, ease: EASE }}>
-            <div className="container">
-              {NAV.map(([label, id]) => <button key={id} className="mobile-link" onClick={() => go(id)}>{label}<Icon name="arrow" size={18} /></button>)}
-              <button className="btn btn-primary btn-block" onClick={() => go("contact")}>Enroll now</button>
+          <motion.nav className="mobile-menu" aria-label="Mobile"
+            initial={{ clipPath: "inset(0 0 100% 0)" }} animate={{ clipPath: "inset(0 0 0% 0)" }} exit={{ clipPath: "inset(0 0 100% 0)" }}
+            transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}>
+            <div className="container mobile-menu-inner">
+              {NAV.map(([label, id], i) => (
+                <motion.button key={id} className="mobile-link" onClick={() => go(id)}
+                  initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 + i * 0.06, duration: 0.5, ease: EASE }}>
+                  <span className="mobile-idx">0{i + 1}</span>{label}<Icon name="arrow" size={20} />
+                </motion.button>
+              ))}
+              <motion.div className="mobile-menu-foot" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+                <button className="btn btn-primary btn-lg btn-block" onClick={() => go("contact")}>Enroll now <Icon name="arrow" size={18} /></button>
+                <div className="mobile-contact">
+                  <a href={`tel:${PHONE_TEL}`}><Icon name="phone" size={16} /> {PHONE}</a>
+                  <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer"><Icon name="whatsapp" size={16} /> WhatsApp</a>
+                </div>
+              </motion.div>
             </div>
           </motion.nav>
         )}
@@ -99,6 +113,7 @@ function HeroVisual() {
 
   return (
     <div className="hero-visual" onPointerMove={onMove} onPointerLeave={() => { mx.set(0); my.set(0); }}>
+      <div className="hv-orbits" aria-hidden="true"><span /><span /><span /></div>
       <motion.div className="hv-stage" style={reduce ? undefined : { rotateX: rx, rotateY: ry, y: lift }}>
         <div className="hv-photo">
           <img src={shafiProfile} alt={`${FOUNDER}, Founder & CEO of SpeakWell English Academy`} />
@@ -108,23 +123,23 @@ function HeroVisual() {
           </div>
         </div>
 
-        <motion.div className="hv-card hv-live" initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9, duration: 0.8, ease: EASE }}>
+        <motion.div className="hv-card hv-live" style={{ z: 70 }} initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9, duration: 0.8, ease: EASE }}>
           <span className="live-dot" />
           <div><strong>Live practice session</strong><span>Online &amp; in person</span></div>
         </motion.div>
 
-        <motion.div className="hv-card hv-wave" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.8, ease: EASE }}>
+        <motion.div className="hv-card hv-wave" style={{ z: 110 }} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1, duration: 0.8, ease: EASE }}>
           <span className="hv-icon"><Icon name="mic" size={18} /></span>
           <div className="wave" aria-hidden="true">{[10, 18, 8, 22, 14, 24, 12, 18, 9, 20, 13, 7, 16, 21, 11].map((h, i) => <i key={i} style={{ height: h, animationDelay: `${i * 0.07}s` }} />)}</div>
         </motion.div>
 
-        <motion.div className="hv-card hv-score" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3, duration: 0.8, ease: EASE }}>
+        <motion.div className="hv-card hv-score" style={{ z: 90 }} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3, duration: 0.8, ease: EASE }}>
           <span className="hv-label">Success rate</span>
           <strong>98%</strong>
           <div className="hv-bar"><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 0.98 }} transition={{ delay: 1.6, duration: 1.4, ease: EASE }} /></div>
         </motion.div>
 
-        <motion.div className="hv-card hv-rating" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, duration: 0.8, ease: EASE }}>
+        <motion.div className="hv-card hv-rating" style={{ z: 60 }} initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.5, duration: 0.8, ease: EASE }}>
           <div className="stars">{[0, 1, 2, 3, 4].map((i) => <Icon key={i} name="star" size={14} />)}</div>
           <span>Rated 10/10 by learners</span>
         </motion.div>
@@ -188,7 +203,7 @@ function Programs() {
         <div className="programs-grid">
           {PROGRAMS.map((p, i) => (
             <Reveal key={p.title} delay={(i % 3) * 0.08} className="program-cell">
-              <article className={p.featured ? "program is-featured" : "program"}>
+              <Tilt max={6} className="tilt-fill"><article className={p.featured ? "program spot is-featured" : "program spot"}>
                 {p.featured && <span className="program-flag">Signature program</span>}
                 <div className="program-top">
                   <span className="program-icon"><Icon name={p.icon} size={22} /></span>
@@ -202,7 +217,7 @@ function Programs() {
                   <div className="full"><dt>Ideal for</dt><dd>{p.ideal}</dd></div>
                 </dl>
                 <button className="program-cta" onClick={() => scrollToId("contact")}>Enquire about this program <Icon name="arrow" size={16} /></button>
-              </article>
+              </article></Tilt>
             </Reveal>
           ))}
         </div>
@@ -221,7 +236,7 @@ function Method() {
         <div className="pillars">
           {PILLARS.map((p, i) => (
             <Reveal key={p.title} delay={(i % 3) * 0.08}>
-              <div className="pillar">
+              <div className="spot pillar">
                 <span className="pillar-icon"><Icon name={p.icon} size={22} /></span>
                 <h3>{p.title}</h3>
                 <p>{p.body}</p>
@@ -278,9 +293,9 @@ function Trainer() {
     <section id="trainer" className="section">
       <div className="container trainer-grid">
         <Reveal className="trainer-photo-wrap">
-          <div className="trainer-photo" ref={ref}>
+          <motion.div className="trainer-photo" ref={ref} initial={{ clipPath: "inset(100% 0 0 0 round 28px)" }} whileInView={{ clipPath: "inset(0% 0 0 0 round 28px)" }} viewport={{ once: true, margin: "0px 0px -15% 0px" }} transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}>
             <motion.img src={shafiProfile} alt={FOUNDER} style={{ y }} />
-          </div>
+          </motion.div>
           <div className="trainer-stat"><strong>10+</strong><span>years helping learners find their voice</span></div>
         </Reveal>
         <div>
@@ -314,7 +329,7 @@ function Formats() {
         <div className="formats">
           {FORMATS.map((f, i) => (
             <Reveal key={f.title} delay={i * 0.1}>
-              <div className={i ? "format format-dark" : "format"}>
+              <div className={i ? "spot format format-dark" : "spot format"}>
                 <div className="format-head">
                   <span className="pillar-icon"><Icon name={f.icon} size={22} /></span>
                   <div><h3>{f.title}</h3><span>{f.note}</span></div>
@@ -331,7 +346,7 @@ function Formats() {
 
 /* ─── REVIEWS (dual marquee) ─── */
 const ReviewCard = ({ r }) => (
-  <figure className="review">
+  <figure className="spot review">
     <div className="stars">{[0, 1, 2, 3, 4].map((i) => <Icon key={i} name="star" size={14} />)}</div>
     <blockquote>“{r.text}”</blockquote>
     <figcaption>
@@ -489,16 +504,80 @@ function Footer() {
   );
 }
 
+/* ─── KEYWORD BAND (moves with scroll) ─── */
+function WordBand() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const x1 = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-30%", "0%"]);
+  const words = ["Fluency", "Confidence", "Public Speaking", "Interviews", "Business English", "Personality", "Pronunciation", "Leadership"];
+  const row = [...words, ...words, ...words];
+  return (
+    <div className="word-band" ref={ref} aria-hidden="true">
+      <motion.div className="word-row" style={{ x: x1 }}>{row.map((w, i) => <span key={i} className={i % 2 ? "outline" : ""}>{w}<i>✦</i></span>)}</motion.div>
+      <motion.div className="word-row word-row-sm" style={{ x: x2 }}>{row.map((w, i) => <span key={i} className={i % 2 ? "" : "outline"}>{w}<i>✦</i></span>)}</motion.div>
+    </div>
+  );
+}
+
+/* ─── MOBILE ACTION BAR + BACK TO TOP ─── */
+function FloatingActions() {
+  const { scrollY, scrollYProgress } = useScroll();
+  const [show, setShow] = useState(false);
+  useMotionValueEvent(scrollY, "change", (y) => {
+    // Hide once the enquiry form is on screen so the bar never covers it
+    const contact = document.getElementById("contact")?.getBoundingClientRect();
+    const atContact = contact && contact.top < window.innerHeight;
+    setShow(y > window.innerHeight * 0.8 && !atContact);
+  });
+  const dash = useTransform(scrollYProgress, (v) => 126 - v * 126);
+  return (
+    <AnimatePresence>
+      {show && (
+        <>
+          <motion.div key="bar" className="mobile-bar" initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }} transition={{ duration: 0.45, ease: EASE }}>
+            <a href={`tel:${PHONE_TEL}`} className="mobile-bar-btn" aria-label="Call"><Icon name="phone" size={20} /></a>
+            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="mobile-bar-btn" aria-label="WhatsApp"><Icon name="whatsapp" size={20} /></a>
+            <button className="btn btn-primary mobile-bar-cta" onClick={() => scrollToId("contact")}>Enroll now <Icon name="arrow" size={18} /></button>
+          </motion.div>
+          <motion.button key="top" className="to-top" onClick={() => scrollToId("home")} aria-label="Back to top"
+            initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.6 }}>
+            <svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="20" /><motion.circle cx="22" cy="22" r="20" className="to-top-ring" style={{ strokeDashoffset: dash }} /></svg>
+            <Icon name="arrow" size={18} style={{ transform: "rotate(-90deg)" }} />
+          </motion.button>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+/* Cards with .spot get a soft gold light that follows the cursor */
+function useSpotlight() {
+  useEffect(() => {
+    const onMove = (e) => {
+      const el = e.target.closest?.(".spot");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
+  }, []);
+}
+
 /* ═══════════════ APP ═══════════════ */
 export default function App() {
   const reduce = useReducedMotion();
   useSmoothScroll(!reduce);
+  useSpotlight();
   return (
     <>
       <Nav />
       <main>
         <Hero />
         <Stats />
+        <WordBand />
         <Programs />
         <Method />
         <Journey />
@@ -510,6 +589,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <FloatingActions />
     </>
   );
 }

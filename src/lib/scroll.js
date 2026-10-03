@@ -15,6 +15,12 @@ export function useSmoothScroll(enabled) {
   }, [enabled]);
 }
 
+/* Freeze page scrolling (e.g. while the mobile menu is open) */
+export function setScrollLock(locked) {
+  if (lenis) { if (locked) lenis.stop(); else lenis.start(); }
+  document.documentElement.style.overflow = locked ? "hidden" : "";
+}
+
 export function scrollToId(id) {
   const el = id === "home" ? 0 : document.getElementById(id);
   if (el === null) return;
