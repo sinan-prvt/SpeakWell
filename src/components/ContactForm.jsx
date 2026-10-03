@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Icon from "./Icon";
-import { COURSES, WHATSAPP } from "../data";
+import { PROGRAMS, WHATSAPP } from "../data";
 
 export default function ContactForm() {
   const [sent, setSent] = useState(false);
@@ -15,10 +15,9 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="glass form-card">
-      <div className="form-glow" />
-      <h3 className="form-title">Enroll Now</h3>
-      <p className="muted">Our team will contact you within 24 hours.</p>
+    <div className="form-card">
+      <h3 className="form-title">Enrollment enquiry</h3>
+      <p className="form-note">Takes under a minute. Your details open in WhatsApp, ready to send.</p>
 
       <AnimatePresence mode="wait">
         {sent ? (
@@ -26,8 +25,8 @@ export default function ContactForm() {
             <motion.div className="sent-check" initial={{ scale: 0, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.1 }}>
               <Icon name="check" size={34} stroke={2.4} />
             </motion.div>
-            <h4 className="serif gold-text" style={{ fontSize: "1.8rem" }}>Enquiry Sent!</h4>
-            <p className="muted">Muhammed Shafi Sir's team will contact you shortly. Welcome to the SpeakWell family!</p>
+            <h4>Thank you — enquiry sent</h4>
+            <p className="form-note">Our team will contact you within 24 hours. Welcome to SpeakWell.</p>
           </motion.div>
         ) : (
           <motion.form key="form" onSubmit={onSubmit} exit={{ opacity: 0, y: -10 }}>
@@ -37,10 +36,10 @@ export default function ContactForm() {
             </div>
             <Field label="Email"><input required name="email" type="email" placeholder="your@email.com" autoComplete="email" /></Field>
             <div className="form-row">
-              <Field label="Course">
+              <Field label="Program">
                 <select required name="course" defaultValue="">
-                  <option value="" disabled>Select…</option>
-                  {COURSES.map((c) => <option key={c.title} value={c.title}>{c.title}</option>)}
+                  <option value="" disabled>Select a program</option>
+                  {PROGRAMS.map((c) => <option key={c.title} value={c.title}>{c.title}</option>)}
                 </select>
               </Field>
               <Field label="Mode">
@@ -51,9 +50,9 @@ export default function ContactForm() {
                 </select>
               </Field>
             </div>
-            <Field label="Message (Optional)"><textarea name="message" rows={3} placeholder="Your goals or questions for Muhammed Shafi Sir…" /></Field>
-            <button type="submit" className="btn btn-gold btn-block">
-              Send Enquiry &amp; Enroll <Icon name="arrow" size={18} />
+            <Field label="Message"><textarea name="message" rows={3} placeholder="Tell us about your goals (optional)" /></Field>
+            <button type="submit" className="btn btn-primary btn-lg btn-block">
+              Send enquiry <Icon name="arrow" size={18} />
             </button>
           </motion.form>
         )}

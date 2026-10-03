@@ -2,64 +2,70 @@ export const PHONE = "+91 97474 25399";
 export const PHONE_TEL = "+919747425399";
 export const WHATSAPP = "919747425399";
 export const EMAIL = "shafi@speakwellacademy.com";
+export const FOUNDER = "Muhammed Shafi";
 
-export const NAV = ["About", "Courses", "Why", "Feedback", "Contact"];
-
-export const ROLES = [
-  "Spoken English Trainer",
-  "Motivational Speaker",
-  "CEO · SpeakWell Academy",
-  "Confidence Coach",
-  "Public Speaking Expert",
+export const NAV = [
+  ["Programs", "programs"],
+  ["Method", "method"],
+  ["Trainer", "trainer"],
+  ["Reviews", "reviews"],
+  ["FAQ", "faq"],
 ];
 
 export const STATS = [
-  { value: 5000, suffix: "+", label: "Students Transformed" },
-  { value: 10, suffix: "+", label: "Years of Excellence" },
-  { value: 98, suffix: "%", label: "Success Rate" },
-  { value: 500, suffix: "+", label: "Live Sessions" },
+  { value: 5000, suffix: "+", label: "Learners trained" },
+  { value: 10, suffix: "+", label: "Years of teaching" },
+  { value: 98, suffix: "%", label: "Success rate" },
+  { value: 500, suffix: "+", label: "Live sessions delivered" },
 ];
 
-export const COURSES = [
-  { icon: "mic", label: "Beginner", title: "Spoken English Foundation", body: "Build pronunciation, grammar and daily vocabulary from zero — with the confidence to speak on day one.", duration: "3 Months", mode: "Online / Offline" },
-  { icon: "briefcase", label: "Professional", title: "Business English Mastery", body: "Emails, meetings, presentations and corporate negotiations — communicate like a leader at the workplace.", duration: "2 Months", mode: "Online / Offline" },
-  { icon: "stage", label: "Advanced", title: "Public Speaking & Personality", body: "Stage presence, storytelling, persuasion and powerful body language — Muhammed Shafi Sir's signature course.", duration: "6 Weeks", mode: "Offline" },
-  { icon: "target", label: "Interview Prep", title: "Interview Crash Course", body: "HR rounds, group discussions, mock interviews — everything you need to land your dream job confidently.", duration: "4 Weeks", mode: "Online / Offline" },
-  { icon: "spark", label: "Kids & Teens", title: "Young Speakers Program", body: "Interactive, fun English for school students — building fluency and love for language from an early age.", duration: "3 Months", mode: "Online / Offline" },
-  { icon: "bolt", label: "Weekend", title: "Weekend Fluency Bootcamp", body: "For busy professionals — intensive weekend sessions for dramatic improvement in just 8 weeks.", duration: "8 Weekends", mode: "Online / Offline" },
+export const PROGRAMS = [
+  { icon: "mic", level: "Beginner", title: "Spoken English Foundation", body: "Build a strong base in pronunciation, everyday grammar and vocabulary — and start speaking from your very first class.", ideal: "Beginners & students", duration: "3 months", mode: "Online · Offline" },
+  { icon: "briefcase", level: "Professional", title: "Business English Mastery", body: "Write clear emails, lead meetings, present ideas and negotiate with confidence in any corporate setting.", ideal: "Working professionals", duration: "2 months", mode: "Online · Offline" },
+  { icon: "stage", level: "Advanced", title: "Public Speaking & Personality", body: "Our signature program — stage presence, storytelling, persuasion and body language for high-impact speaking.", ideal: "Leaders & aspiring speakers", duration: "6 weeks", mode: "Offline", featured: true },
+  { icon: "target", level: "Career", title: "Interview Preparation", body: "HR rounds, group discussions and realistic mock interviews, so you walk into every interview prepared.", ideal: "Graduates & job seekers", duration: "4 weeks", mode: "Online · Offline" },
+  { icon: "spark", level: "Kids & Teens", title: "Young Speakers Program", body: "Interactive, activity-led English that builds fluency early — and a lasting love for the language.", ideal: "School students", duration: "3 months", mode: "Online · Offline" },
+  { icon: "bolt", level: "Intensive", title: "Weekend Fluency Bootcamp", body: "Focused weekend sessions for busy professionals who want visible progress in eight weeks.", ideal: "Busy professionals", duration: "8 weekends", mode: "Online · Offline" },
 ];
 
-export const WHY = [
-  ["Muhammed Shafi Sir Teaches Every Class", "No junior faculty, no outsourcing — every session conducted personally by Muhammed Shafi Sir himself. You always get the very best."],
-  ["Activity-Based Real Learning", "Role plays, storytelling, debates, group discussions and real-world scenarios — English that is fun, practical and permanent."],
-  ["Flexible Timings for All", "Morning, evening and weekend batches in both online and offline formats — we fit seamlessly into your schedule."],
-  ["Lifetime Alumni Community", "Access our exclusive practice groups, doubt-clearing sessions and continued support even long after you graduate."],
-  ["Certified & Affordable", "World-class training at accessible prices — with a recognized SpeakWell Academy certificate on completion."],
+export const PILLARS = [
+  { icon: "user", title: "Taught by the founder", body: `Every session is led personally by ${FOUNDER} — no outsourced or junior faculty.` },
+  { icon: "chat", title: "Practice-first learning", body: "Role plays, debates, storytelling and real-world scenarios make English practical and lasting." },
+  { icon: "calendar", title: "Flexible schedules", body: "Morning, evening and weekend batches — online or in our Tirurangadi classroom." },
+  { icon: "users", title: "Lifelong community", body: "Alumni practice groups and doubt-clearing support continue long after you graduate." },
+  { icon: "award", title: "Recognised certificate", body: "Complete your program with a SpeakWell English Academy certificate." },
+  { icon: "tag", title: "Accessible fees", body: "High-quality training at fees that stay within reach for students and families." },
 ];
 
-export const MODES = [
-  { title: "Online Classes", icon: "laptop", feats: ["Live Zoom / Google Meet sessions", "Recorded class access anytime", "WhatsApp practice group", "Digital study materials", "Online mock sessions & feedback"] },
-  { title: "Offline Classes", icon: "building", feats: ["Face-to-face with Muhammed Shafi Sir", "In-person debates & discussions", "Live mock interviews", "Activity-based group sessions", "Study material provided"] },
+export const STEPS = [
+  { title: "Choose your program", body: "Share your goals through our enquiry form. Our team will contact you within 24 hours to help you choose the right course and batch." },
+  { title: "Join your batch", body: "Learn live on Zoom / Google Meet or face-to-face in Tirurangadi — in a morning, evening or weekend slot that suits you." },
+  { title: "Practise in every session", body: "Speak from day one through guided activities, debates, presentations and mock sessions with personal feedback." },
+  { title: "Graduate with confidence", body: "Earn your SpeakWell certificate and stay connected through our alumni practice community." },
 ];
 
-export const WRITTEN = [
-  { name: "Arjun Menon", role: "Software Engineer, Kochi", text: "Muhammed Shafi Sir rebuilt my confidence from ground up. Placed in an MNC within 2 months. Truly life-changing.", color: "#d4a853" },
-  { name: "Priya Nair", role: "Bank Officer, Tirurangadi", text: "From trembling at English to addressing 200 people — SpeakWell Academy is simply life-changing.", color: "#7fb3ff" },
-  { name: "Rajan Pillai", role: "Parent, Palakkad", text: "My daughter now leads school debates. Muhammed Shafi Sir has an incredible gift for connecting with students of every age.", color: "#6ee7a0" },
-  { name: "Sneha Raj", role: "HR Executive, Bangalore", text: "The Business English course transformed my presentation skills. Got a promotion within 3 months!", color: "#ee9cf9" },
-  { name: "Mohammed Riyas", role: "Bank PO, Kozhikode", text: "Cleared my Bank PO interview in the very first attempt after Muhammed Shafi Sir's crash course. Incredible teacher.", color: "#fdab6a" },
-  { name: "Divya Krishnan", role: "Student, Tirurangadi", text: "I went from the shyest student to speaking at college events. SpeakWell changed my entire personality.", color: "#5fdcef" },
+export const FORMATS = [
+  { icon: "laptop", title: "Online", note: "Learn from anywhere", feats: ["Live Zoom / Google Meet sessions", "Recorded classes, available anytime", "WhatsApp practice group", "Digital study materials", "Online mock sessions & feedback"] },
+  { icon: "building", title: "In person", note: "Tirurangadi, Kerala", feats: [`Face-to-face with ${FOUNDER}`, "In-person debates & discussions", "Live mock interviews", "Activity-based group sessions", "Printed study material"] },
 ];
 
-export const VIDEOS = [
-  { name: "Akhil Thomas", role: "MNC Employee, Pune", quote: "This academy gave me the confidence to speak in board meetings. Muhammed Shafi Sir's approach is unlike anything I've experienced.", accent: "#d4a853" },
-  { name: "Fathima Beevi", role: "Teacher, Malappuram", quote: "I joined to improve classroom English and ended up transforming my entire communication style completely.", accent: "#7fb3ff" },
+export const REVIEWS = [
+  { name: "Arjun Menon", role: "Software Engineer, Kochi", text: "Shafi Sir rebuilt my confidence from the ground up. I was placed in an MNC within two months. Truly life-changing." },
+  { name: "Priya Nair", role: "Bank Officer, Tirurangadi", text: "I went from trembling at English to addressing 200 people. SpeakWell Academy is simply life-changing." },
+  { name: "Rajan Pillai", role: "Parent, Palakkad", text: "My daughter now leads school debates. Shafi Sir has an incredible gift for connecting with students of every age." },
+  { name: "Sneha Raj", role: "HR Executive, Bangalore", text: "The Business English course transformed my presentation skills. I got a promotion within three months." },
+  { name: "Mohammed Riyas", role: "Bank PO, Kozhikode", text: "I cleared my Bank PO interview on the very first attempt after the interview crash course. An incredible teacher." },
+  { name: "Divya Krishnan", role: "Student, Tirurangadi", text: "I went from the shyest student in class to speaking at college events. SpeakWell changed my entire personality." },
+  { name: "Akhil Thomas", role: "MNC Employee, Pune", text: "This academy gave me the confidence to speak in board meetings. The approach is unlike anything I've experienced." },
+  { name: "Fathima Beevi", role: "Teacher, Malappuram", text: "I joined to improve my classroom English and ended up transforming my entire communication style." },
 ];
 
-export const VOICES = [
-  { name: "Vishnu Kumar", time: "1:24", color: "#d4a853", quote: "I was always afraid of English in public. After one month with Muhammed Shafi Sir, I gave a speech at my office annual day." },
-  { name: "Amritha Saji", time: "0:58", color: "#6ee7a0", quote: "The way Muhammed Shafi Sir teaches — with so much energy and patience — makes you fall in love with English." },
-  { name: "Jithin Mathew", time: "2:10", color: "#fdab6a", quote: "SpeakWell is not just a class. It is a transformation. Muhammed Shafi Sir cares about every single student personally." },
+export const FAQ = [
+  ["Who teaches the classes?", `Every class is taught personally by ${FOUNDER}, Founder & CEO of SpeakWell English Academy. We do not use junior or outsourced faculty.`],
+  ["Do you offer online classes?", "Yes. Online classes run live on Zoom / Google Meet and include recorded sessions, digital study material and a WhatsApp practice group. In-person classes are held in Tirurangadi, Kerala."],
+  ["What are the class timings?", "We run morning, evening and weekend batches for every program, so you can learn around your studies or work."],
+  ["How long are the programs?", "Programs range from 4 weeks (Interview Preparation) to 3 months (Spoken English Foundation and Young Speakers). The Weekend Bootcamp runs over 8 weekends."],
+  ["How much does it cost?", "Our online Spoken English course is currently available at a special price of ₹699. For other programs, send an enquiry and our team will share the current fees and batch dates."],
+  ["Will I receive a certificate?", "Yes. Every learner who completes a program receives a SpeakWell English Academy certificate."],
+  ["How do I enroll?", "Fill in the enquiry form below — it opens WhatsApp with your details ready to send. You can also call or WhatsApp us directly on " + PHONE + "."],
 ];
-
-export const MARQUEE_WORDS = ["Fluency", "Confidence", "Public Speaking", "Interviews", "Business English", "Personality", "Pronunciation", "Leadership"];
